@@ -3,1290 +3,462 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matías Cofré • Backend Developer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            /* Paleta Minimalista */
-            --color-primary: #0a0a0a;          /* Negro profundo */
-            --color-secondary: #1a1a1a;        /* Gris muy oscuro */
-            --color-tertiary: #2a2a2a;         /* Gris oscuro */
-            --color-accent: #00d4ff;           /* Azul cian - Color de acento */
-            --color-text-primary: #ffffff;     /* Blanco puro */
-            --color-text-secondary: #a0a0a0;   /* Gris claro */
-            --color-text-muted: #666666;       /* Gris medio */
-            --color-background: #0f0f0f;       /* Fondo principal */
-            --color-surface: #1a1a1a;          /* Superficies elevadas */
-            
-            /* Tipografía */
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-            
-            /* Espaciado */
-            --spacing-xs: 0.5rem;
-            --spacing-sm: 1rem;
-            --spacing-md: 2rem;
-            --spacing-lg: 4rem;
-            --spacing-xl: 6rem;
-            
-            /* Efectos */
-            --glow-subtle: 0 0 20px rgba(0, 212, 255, 0.1);
-            --glow-medium: 0 0 30px rgba(0, 212, 255, 0.2);
-            --glow-strong: 0 0 40px rgba(0, 212, 255, 0.3);
-            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.1);
-            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.2);
-            
-            /* Transiciones */
-            --transition-fast: 0.2s ease-out;
-            --transition-medium: 0.4s ease-out;
-            --transition-slow: 0.6s ease-out;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            background: var(--color-background);
-            color: var(--color-text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* ===== EFECTOS DE FONDO ===== */
-        .background-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            opacity: 0.03;
-            background-image: 
-                linear-gradient(90deg, var(--color-accent) 1px, transparent 1px),
-                linear-gradient(0deg, var(--color-accent) 1px, transparent 1px);
-            background-size: 40px 40px;
-            animation: grid-shift 60s linear infinite;
-        }
-
-        @keyframes grid-shift {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(40px, 40px); }
-        }
-
-        .scanlines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            background: linear-gradient(
-                transparent 98%, 
-                rgba(0, 212, 255, 0.02) 100%
-            );
-            background-size: 100% 3px;
-            animation: scanline 0.1s linear infinite;
-        }
-
-        @keyframes scanline {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(3px); }
-        }
-
-        /* ===== NAVEGACIÓN ===== */
-        .navigation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: var(--spacing-sm) 0;
-            background: rgba(15, 15, 15, 0.9);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-            opacity: 0;
-            transform: translateY(-100%);
-            transition: all var(--transition-medium);
-        }
-
-        .navigation.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 var(--spacing-md);
-        }
-
-        .nav-logo {
-            font-family: var(--font-mono);
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: var(--color-text-primary);
-            text-decoration: none;
-            position: relative;
-        }
-
-        .nav-logo::after {
-            content: '';
-            position: absolute;
-            right: -8px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 4px;
-            background: var(--color-accent);
-            border-radius: 50%;
-            animation: blink 1.5s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: var(--spacing-md);
-        }
-
-        .nav-links a {
-            color: var(--color-text-secondary);
-            text-decoration: none;
-            font-weight: 400;
-            font-size: 0.9rem;
-            padding: var(--spacing-xs) var(--spacing-sm);
-            border-radius: 4px;
-            transition: all var(--transition-fast);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
-            transition: left var(--transition-medium);
-        }
-
-        .nav-links a:hover {
-            color: var(--color-text-primary);
-            box-shadow: var(--glow-subtle);
-        }
-
-        .nav-links a:hover::before {
-            left: 100%;
-        }
-
-        /* ===== SECCIÓN HERO ===== */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            padding: 0 var(--spacing-md);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            animation: hero-fade-in 1.5s ease-out;
-        }
-
-        @keyframes hero-fade-in {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-greeting {
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            color: var(--color-accent);
-            margin-bottom: var(--spacing-sm);
-            font-weight: 400;
-        }
-
-        .hero-name {
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: var(--spacing-sm);
-            background: linear-gradient(135deg, var(--color-text-primary), var(--color-text-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-title {
-            font-size: clamp(1.2rem, 4vw, 2rem);
-            font-weight: 400;
-            color: var(--color-text-secondary);
-            margin-bottom: var(--spacing-md);
-            line-height: 1.3;
-        }
-
-        .hero-description {
-            font-size: 1.1rem;
-            color: var(--color-text-muted);
-            max-width: 600px;
-            margin: 0 auto var(--spacing-lg);
-            line-height: 1.6;
-        }
-
-        .hero-cta {
-            display: inline-block;
-            padding: var(--spacing-sm) var(--spacing-md);
-            background: transparent;
-            border: 1px solid var(--color-accent);
-            color: var(--color-accent);
-            text-decoration: none;
-            font-weight: 500;
-            border-radius: 4px;
-            transition: all var(--transition-medium);
-            position: relative;
-            overflow: hidden;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
-        }
-
-        .hero-cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--color-accent);
-            transition: left var(--transition-medium);
-            z-index: -1;
-        }
-
-        .hero-cta:hover {
-            color: var(--color-primary);
-            box-shadow: var(--glow-medium);
-            transform: translateY(-2px);
-        }
-
-        .hero-cta:hover::before {
-            left: 0;
-        }
-
-        /* ===== SECCIONES PRINCIPALES ===== */
-        .section {
-            padding: var(--spacing-xl) 0;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-left: var(--spacing-md);
-            padding-right: var(--spacing-md);
-        }
-
-        .section-header {
-            margin-bottom: var(--spacing-lg);
-            text-align: center;
-        }
-
-        .section-number {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--color-accent);
-            margin-bottom: var(--spacing-xs);
-            font-weight: 400;
-        }
-
-        .section-title {
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 600;
-            color: var(--color-text-primary);
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 60px;
-            height: 2px;
-            background: var(--color-accent);
-            border-radius: 1px;
-        }
-
-        /* ===== SOBRE MÍ ===== */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: var(--spacing-lg);
-            align-items: start;
-        }
-
-        .about-image {
-            position: relative;
-        }
-
-        .profile-placeholder {
-            width: 280px;
-            height: 280px;
-            background: linear-gradient(135deg, var(--color-secondary), var(--color-tertiary));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: var(--color-text-secondary);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .profile-placeholder::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
-            animation: profile-scan 3s ease-in-out infinite;
-        }
-
-        @keyframes profile-scan {
-            0% { left: -100%; }
-            50% { left: 100%; }
-            100% { left: 100%; }
-        }
-
-        .about-text {
-            color: var(--color-text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-
-        .about-text p {
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .about-text strong {
-            color: var(--color-text-primary);
-            font-weight: 600;
-        }
-
-        .about-highlight {
-            color: var(--color-accent);
-            font-weight: 500;
-        }
-
-        /* ===== HABILIDADES ===== */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--spacing-md);
-        }
-
-        .skill-category {
-            background: var(--color-surface);
-            padding: var(--spacing-md);
-            border-radius: 8px;
-            border: 1px solid rgba(0, 212, 255, 0.1);
-            transition: all var(--transition-medium);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-category::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--color-accent), transparent);
-            transform: scaleX(0);
-            transition: transform var(--transition-medium);
-            transform-origin: left;
-        }
-
-        .skill-category:hover {
-            border-color: rgba(0, 212, 255, 0.3);
-            box-shadow: var(--glow-subtle);
-            transform: translateY(-4px);
-        }
-
-        .skill-category:hover::before {
-            transform: scaleX(1);
-        }
-
-        .skill-header {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .skill-icon {
-            width: 24px;
-            height: 24px;
-            background: var(--color-accent);
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            color: var(--color-primary);
-            font-family: var(--font-mono);
-            font-weight: 600;
-        }
-
-        .skill-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--color-text-primary);
-        }
-
-        .skill-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--spacing-xs);
-        }
-
-        .skill-item {
-            background: rgba(0, 212, 255, 0.1);
-            color: var(--color-text-secondary);
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-family: var(--font-mono);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            transition: all var(--transition-fast);
-            cursor: default;
-        }
-
-        .skill-item:hover {
-            background: rgba(0, 212, 255, 0.2);
-            color: var(--color-text-primary);
-            border-color: rgba(0, 212, 255, 0.4);
-            transform: scale(1.05);
-        }
-
-        /* ===== EXPERIENCIA ===== */
-        .experience-timeline {
-            position: relative;
-            padding-left: var(--spacing-lg);
-        }
-
-        .experience-timeline::before {
-            content: '';
-            position: absolute;
-            left: 1.5rem;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--color-accent), transparent);
-        }
-
-        .experience-item {
-            position: relative;
-            margin-bottom: var(--spacing-lg);
-            background: var(--color-surface);
-            padding: var(--spacing-md);
-            border-radius: 8px;
-            border-left: 3px solid var(--color-accent);
-            transition: all var(--transition-medium);
-        }
-
-        .experience-item::before {
-            content: '';
-            position: absolute;
-            left: -2.8rem;
-            top: var(--spacing-md);
-            width: 12px;
-            height: 12px;
-            background: var(--color-accent);
-            border-radius: 50%;
-            box-shadow: 0 0 0 4px var(--color-background);
-        }
-
-        .experience-item:hover {
-            transform: translateX(8px);
-            box-shadow: var(--glow-subtle);
-        }
-
-        .experience-date {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--color-accent);
-            margin-bottom: var(--spacing-xs);
-            font-weight: 500;
-        }
-
-        .experience-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--color-text-primary);
-            margin-bottom: 0.25rem;
-        }
-
-        .experience-company {
-            color: var(--color-text-secondary);
-            margin-bottom: var(--spacing-sm);
-            font-weight: 500;
-        }
-
-        .experience-description {
-            color: var(--color-text-muted);
-            line-height: 1.6;
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .experience-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--spacing-xs);
-        }
-
-        .tech-tag {
-            background: rgba(0, 212, 255, 0.1);
-            color: var(--color-accent);
-            padding: 0.2rem 0.6rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-family: var(--font-mono);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-        }
-
-        /* ===== PROYECTOS ===== */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: var(--spacing-md);
-        }
-
-        .project-card {
-            background: var(--color-surface);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(0, 212, 255, 0.1);
-            transition: all var(--transition-medium);
-            position: relative;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--color-accent), transparent);
-            transform: scaleX(0);
-            transition: transform var(--transition-medium);
-            transform-origin: left;
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(0, 212, 255, 0.3);
-            box-shadow: var(--glow-medium);
-        }
-
-        .project-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .project-preview {
-            height: 200px;
-            background: linear-gradient(135deg, var(--color-secondary), var(--color-tertiary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-preview::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
-            transition: left var(--transition-slow);
-        }
-
-        .project-card:hover .project-preview::before {
-            left: 100%;
-        }
-
-        .project-icon {
-            font-size: 3rem;
-            color: var(--color-text-secondary);
-        }
-
-        .project-content {
-            padding: var(--spacing-md);
-        }
-
-        .project-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--color-text-primary);
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .project-description {
-            color: var(--color-text-muted);
-            line-height: 1.6;
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--spacing-xs);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .project-actions {
-            display: flex;
-            gap: var(--spacing-sm);
-        }
-
-        .project-link {
-            padding: var(--spacing-xs) var(--spacing-sm);
-            background: transparent;
-            border: 1px solid var(--color-accent);
-            color: var(--color-accent);
-            text-decoration: none;
-            border-radius: 4px;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            transition: all var(--transition-fast);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--color-accent);
-            transition: left var(--transition-fast);
-            z-index: -1;
-        }
-
-        .project-link:hover {
-            color: var(--color-primary);
-        }
-
-        .project-link:hover::before {
-            left: 0;
-        }
-
-        /* ===== CONTACTO ===== */
-        .contact-content {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-description {
-            font-size: 1.1rem;
-            color: var(--color-text-secondary);
-            margin-bottom: var(--spacing-lg);
-            line-height: 1.6;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--spacing-md);
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .contact-item {
-            background: var(--color-surface);
-            padding: var(--spacing-md);
-            border-radius: 8px;
-            border: 1px solid rgba(0, 212, 255, 0.1);
-            transition: all var(--transition-medium);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(0, 212, 255, 0.05), transparent 70%);
-            opacity: 0;
-            transition: opacity var(--transition-medium);
-        }
-
-        .contact-item:hover {
-            border-color: rgba(0, 212, 255, 0.3);
-            transform: translateY(-4px);
-            box-shadow: var(--glow-subtle);
-        }
-
-        .contact-item:hover::before {
-            opacity: 1;
-        }
-
-        .contact-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--color-accent);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto var(--spacing-sm);
-            font-size: 1.2rem;
-            color: var(--color-primary);
-            position: relative;
-            z-index: 1;
-        }
-
-        .contact-label {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--color-accent);
-            margin-bottom: 0.25rem;
-            font-weight: 500;
-        }
-
-        .contact-value {
-            color: var(--color-text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .contact-value a {
-            color: inherit;
-            text-decoration: none;
-            transition: color var(--transition-fast);
-            position: relative;
-            z-index: 1;
-        }
-
-        .contact-value a:hover {
-            color: var(--color-text-primary);
-        }
-
-        /* ===== EFECTOS DE SCROLL ===== */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all var(--transition-slow);
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .slide-in-left {
-            opacity: 0;
-            transform: translateX(-30px);
-            transition: all var(--transition-slow);
-        }
-
-        .slide-in-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide-in-right {
-            opacity: 0;
-            transform: translateX(30px);
-            transition: all var(--transition-slow);
-        }
-
-        .slide-in-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* ===== FOOTER ===== */
-        .footer {
-            text-align: center;
-            padding: var(--spacing-md) 0;
-            border-top: 1px solid rgba(0, 212, 255, 0.1);
-            margin-top: var(--spacing-xl);
-        }
-
-        .footer-text {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--color-text-muted);
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .about-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: var(--spacing-md);
-            }
-            
-            .profile-placeholder {
-                width: 200px;
-                height: 200px;
-                margin: 0 auto;
-            }
-            
-            .experience-timeline {
-                padding-left: var(--spacing-md);
-            }
-            
-            .experience-timeline::before {
-                left: 0.5rem;
-            }
-            
-            .experience-item::before {
-                left: -1.3rem;
-            }
-            
-            .section {
-                padding: var(--spacing-lg) var(--spacing-sm);
-            }
-        }
-
-        /* ===== EFECTOS ADICIONALES ===== */
-        .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--color-accent);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity var(--transition-fast);
-            mix-blend-mode: difference;
-        }
-
-        .cursor-outline {
-            width: 32px;
-            height: 32px;
-            border: 1px solid var(--color-accent);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
-            opacity: 0;
-            transition: all var(--transition-fast);
-            mix-blend-mode: difference;
-        }
-
-        @media (hover: hover) and (pointer: fine) {
-            .cursor-dot,
-            .cursor-outline {
-                opacity: 1;
-            }
-        }
-    </style>
+    <title>Matías Cofré - Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Efectos de fondo -->
-    <div class="background-pattern"></div>
-    <div class="scanlines"></div>
-    
-    <!-- Cursor personalizado -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h2 data-translate="name">Matías Cofré</h2>
+            </div>
 
-    <!-- Navegación -->
-    <nav class="navigation" id="navigation">
-        <div class="nav-container">
-            <a href="#home" class="nav-logo">COFRE-DEV</a>
-            <ul class="nav-links">
-                <li><a href="#about">Sobre mí</a></li>
-                <li><a href="#skills">Habilidades</a></li>
-                <li><a href="#experience">Experiencia</a></li>
-                <li><a href="#projects">Proyectos</a></li>
-                <li><a href="#contact">Contacto</a></li>
-            </ul>
-        </div>
-    </nav>
+            <div class="nav-controls">
+                <button class="language-toggle" id="languageToggle">
+                    <i class="fas fa-globe"></i>
+                    <span id="currentLang">ES</span>
+                </button>
+
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+
+        </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="hero">
+        <div class="code-rain"></div>
         <div class="hero-content">
-            <div class="hero-greeting">$ whoami</div>
-            <h1 class="hero-name">Matías Cofré</h1>
-            <h2 class="hero-title">Backend Developer & Data Analyst</h2>
-            <p class="hero-description">
-                Especialista en desarrollo backend con experiencia en sistemas web escalables, 
-                APIs REST e ingeniería de datos. Transformo ideas complejas en soluciones técnicas robustas.
-            </p>
-            <a href="#about" class="hero-cta">Ver mi trabajo →</a>
-        </div>
-    </section>
+            <div class="hero-text">
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-controls">
+                            <span class="control-dot red"></span>
+                            <span class="control-dot yellow"></span>
+                            <span class="control-dot green"></span>
+                        </div>
+                        <span class="terminal-title">matias@portfolio:~$</span>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="terminal-line">
+                            <span class="prompt">$</span>
+                            <span class="command">whoami</span>
+                        </div>
+                        <div class="terminal-output">
+                            <h1 class="hero-title">
+                                <span class="highlight">Matías Cofré</span>
+                            </h1>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="prompt">$</span>
+                            <span class="command">cat ./role.txt</span>
+                        </div>
+                        <div class="terminal-output">
+                            <h2 class="hero-subtitle" data-translate="hero-role">Software Engineer & Backend Developer</h2>
+                        </div>
+                    </div>
+                </div>
+                <p class="hero-description" data-translate="hero-description">
+                    Ingeniero en informática especializado en desarrollo Backend y automatización de procesos. 
+                    Transformo ideas complejas en soluciones tecnológicas eficientes que impulsan el crecimiento empresarial.
+                </p>
+                <br>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary" data-translate="hero-contact">Contacto</a>
+                    <a href="#projects" class="btn btn-secondary" data-translate="hero-projects">Ver Proyectos</a>
+                    <a href="#skills" class="btn btn-outline">
+                        <i class="fas fa-code"></i>
+                        <span data-translate="view-tech">Ver Tecnologías</span>
+                    </a>
+                </div>
+            </div>
 
-    <!-- Sobre Mí -->
-    <section class="section fade-in" id="about">
-        <div class="section-header">
-            <div class="section-number">01.</div>
-            <h2 class="section-title">Sobre mí</h2>
-        </div>
-        
-        <div class="about-content">
-            <div class="about-image slide-in-left">
-                <div class="profile-placeholder">
-                    <span>👨‍💻</span>
-                </div>
-            </div>
-            
-            <div class="about-text slide-in-right">
-                <p>
-                    Soy un <strong>Ingeniero en Informática</strong> con más de 2 años de experiencia especializado en 
-                    <span class="about-highlight">desarrollo backend</span> e ingeniería de datos. Mi pasión se centra en crear 
-                    soluciones digitales eficientes que resuelvan problemas reales de negocio.
-                </p>
-                
-                <p>
-                    He trabajado en diversos sectores incluyendo <strong>finanzas, minería y consultoría tributaria</strong>, 
-                    donde he liderado proyectos de desarrollo e integración con APIs REST en plataformas como 
-                    <span class="about-highlight">Webpay y Defontana</span>, mejorando significativamente la eficiencia operativa.
-                </p>
-                
-                <p>
-                    Mi stack principal incluye <strong>Python, Django, Spring Boot y .net</strong>. Me especializo en 
-                    arquitectura de sistemas. 
-                    Disfruto trabajando en equipos ágiles y enfrentando desafíos técnicos complejos.
-                </p>
-                
-                <p>
-                    Cuando no estoy programando, me mantengo actualizado con las últimas tendencias tecnológicas.
-                </p>
-            </div>
-        </div>
-    </section>
+            <div class="hero-visual">
+                <div class="code-editor">
+                    <div class="editor-header">
+                        <div class="editor-tabs">
+                            <div class="tab active">
+                                <i class="fab fa-python"></i>
+                                <span>main.py</span>
+                            </div>
+                        </div>
+                        <div class="editor-controls">
+                            <i class="fas fa-search"></i>
+                            <i class="fas fa-cog"></i>
+                        </div>
+                    </div>
+                    <div class="editor-content">
 
-    <!-- Habilidades -->
-    <section class="section fade-in" id="skills">
-        <div class="section-header">
-            <div class="section-number">02.</div>
-            <h2 class="section-title">Habilidades técnicas</h2>
-        </div>
-        
-        <div class="skills-grid">
-            <div class="skill-category">
-                <div class="skill-header">
-                    <div class="skill-icon">BE</div>
-                    <h3 class="skill-title">Backend Development</h3>
-                </div>
-                <div class="skill-list">
-                    <!-- <span class="skill-item">Python</span> -->
-                    <span class="skill-item">Django</span>
-                    <span class="skill-item">Spring Boot</span>
-                    <!-- <span class="skill-item">Node.js</span> -->
-                    <span class="skill-item">.NET</span>
-                    <!-- <span class="skill-item">Java</span> -->
-                    <span class="skill-item">APIs REST</span>
-                </div>
-            </div>
-            
-            <div class="skill-category">
-                <div class="skill-header">
-                    <div class="skill-icon">FE</div>
-                    <h3 class="skill-title">Frontend & Desktop</h3>
-                </div>
-                <div class="skill-list">
-                    <!-- <span class="skill-item">React</span> -->
-                    <span class="skill-item">Vue.js</span>
-                    <span class="skill-item">ElectronJS</span>
-                    <span class="skill-item">WinForms</span>
-                    <span class="skill-item">HTML/CSS</span>
-                    <span class="skill-item">JavaScript</span>
-                </div>
-            </div>
-            
-            <div class="skill-category">
-                <div class="skill-header">
-                    <div class="skill-icon">DB</div>
-                    <h3 class="skill-title">Bases de datos</h3>
-                </div>
-                <div class="skill-list">
-                    <!-- <span class="skill-item">PostgreSQL</span> -->
-                    <span class="skill-item">MySQL</span>
-                    <span class="skill-item">MongoDB</span>
-                    <!-- <span class="skill-item">SQL Avanzado</span> -->
-                </div>
-            </div>
-<!--             
-            <div class="skill-category">
-                <div class="skill-header">
-                    <div class="skill-icon">DA</div>
-                    <h3 class="skill-title">Análisis de datos</h3>
-                </div>
-                <div class="skill-list">
-                    <span class="skill-item">Power BI</span>
-                    <span class="skill-item">Pandas</span>
-                    <span class="skill-item">NumPy</span>
-                    <span class="skill-item">Excel VBA</span>
-                    <span class="skill-item">ETL Pipelines</span>
-                </div>
-            </div> -->
-            
-            <div class="skill-category">
-                <div class="skill-header">
-                    <div class="skill-icon">TO</div>
-                    <h3 class="skill-title">Herramientas</h3>
-                </div>
-                <div class="skill-list">
-                    <span class="skill-item">SAP</span>
-                    <span class="skill-item">Zoho ONE</span>
-                    <span class="skill-item">Defontana</span>
-                    <span class="skill-item">Scrum</span>
-                    <!-- <span class="skill-item">BPMN</span> -->
-                    <span class="skill-item">Git</span>
-                </div>
-            </div>
-            
-            <div class="skill-category">
-                <div class="skill-header">
-                    <div class="skill-icon">LN</div>
-                    <h3 class="skill-title">Idiomas</h3>
-                </div>
-                <div class="skill-list">
-                    <span class="skill-item">Español (Nativo)</span>
-                    <span class="skill-item">Inglés (B2)</span>
-                </div>
-            </div>
-        </div>
-    </section>
+                        <div class="line-numbers">
+                            <span>1</span> <span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                        </div>
 
-    <!-- Experiencia -->
-    <section class="section fade-in" id="experience">
-        <div class="section-header">
-            <div class="section-number">03.</div>
-            <h2 class="section-title">Experiencia profesional</h2>
-        </div>
-        
-        <div class="experience-timeline">
-            <div class="experience-item">
-                <div class="experience-date">SEPTIEMBRE 2024 - PRESENTE</div>
-                <h3 class="experience-title">Programador Backend / Full Stack Developer</h3>
-                <div class="experience-company">Ara y Bustamante Consultores</div>
-                <p class="experience-description">
-                    Desarrollo de sistemas web corporativos utilizando Django y Vue.js, con integración de APIs REST 
-                    para sistemas externos como Banco Central y Defontana. Responsable del desarrollo de software 
-                    tributario y contable con .NET, optimización de procesos empresariales mediante BPMN, y creación 
-                    de documentación técnica para facilitar el mantenimiento y capacitación de usuarios.
-                </p>
-                <div class="experience-tech">
-                    <span class="tech-tag">Django</span>
-                    <span class="tech-tag">Vue.js</span>
-                    <span class="tech-tag">.NET</span>
-                    <span class="tech-tag">APIs REST</span>
-                    <span class="tech-tag">BPMN</span>
-                    <span class="tech-tag">MySQL</span>
-                </div>
-            </div>
-            
-            <div class="experience-item">
-                <div class="experience-date">AGOSTO 2023 - AGOSTO 2024</div>
-                <h3 class="experience-title">Data Analyst</h3>
-                <div class="experience-company">Sodexo Chile</div>
-                <p class="experience-description">
-                    Análisis y revisión documental de exámenes ocupacionales para postulantes en Minera Collahuasi. 
-                    Implementación de procesos automatizados de análisis de datos usando Python, SQL y Power BI, 
-                    mejorando la eficiencia en evaluación de exámenes médicos en un 60%. Desarrollo de algoritmos 
-                    de limpieza de datos con Pandas y VBA, reduciendo significativamente los tiempos de preparación de informes.
-                </p>
-                <div class="experience-tech">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">SQL</span>
-                    <span class="tech-tag">Power BI</span>
-                    <span class="tech-tag">Pandas</span>
-                    <span class="tech-tag">VBA</span>
-                </div>
-            </div>
-            <div class="experience-item">
-                <div class="experience-date">AGOSTO 2023 - AGOSTO 2024</div>
-                <h3 class="experience-title">Analista de cuentas por pagar</h3>
-                <div class="experience-company">CMPC</div>
-                <p class="experience-description">
-                    Análisis y revisión documental de exámenes ocupacionales para postulantes en Minera Collahuasi. 
-                    Implementación de procesos automatizados de análisis de datos usando Python, SQL y Power BI, 
-                    mejorando la eficiencia en evaluación de exámenes médicos en un 60%. Desarrollo de algoritmos 
-                    de limpieza de datos con Pandas y VBA, reduciendo significativamente los tiempos de preparación de informes.
-                </p>
-                <div class="experience-tech">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">SQL</span>
-                    <span class="tech-tag">Power BI</span>
-                    <span class="tech-tag">Pandas</span>
-                    <span class="tech-tag">VBA</span>
+                        <div class="code-content">
+                            <span class="code-line"><span class="keyword">class</span><span class="class-name">BackendDeveloper</span>:</span>
+                            <span class="code-line">    <span class="keyword">def</span> <span class="function">__init__</span>(self):</span>
+                            <span class="code-line">        self.name = <span class="string">"Matías Cofré"</span></span>
+                            <span class="code-line">        self.languages = [</span>
+                            <span class="code-line">            <span class="string">"Python"</span>, <span class="string">"Java"</span>, <span class="string">"C#"</span>, <span class="string">"SQL"</span></span>
+                            <span class="code-line">        ]</span>
+                            <span class="code-line">        self.frameworks = [</span>
+                            <span class="code-line">            <span class="string">"Spring Boot"</span>, <span class="string">".NET"</span>, <span class="string">"FastAPI"</span></span>
+                            <span class="code-line">        ]</span>
+                            <span class="code-line">        self.ambition = <span class="string">"∞"</span></span>
+                        </div>
+                    </div>
+                    <div class="typing-indicator">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- Proyectos -->
-    <section class="section fade-in" id="projects">
-        <div class="section-header">
-            <div class="section-number">04.</div>
-            <h2 class="section-title">Proyectos destacados</h2>
-        </div>
-        
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-preview">
-                    <div class="project-icon">📊</div>
+    <!-- Tech Stack Carousel -->
+    <section class="tech-carousel-section">
+        <div class="container">
+            <h3 class="carousel-title" data-translate="tech-stack">Tecnologías que domino</h3>
+            <div class="tech-carousel">
+                <div class="tech-track">
+                    <!-- Programming Languages -->
+                    <div class="tech-item">
+                        <i class="fab fa-python"></i>
+                        <span>Python</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-java"></i>
+                        <span>Java</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-microsoft"></i>
+                        <span>C#/.NET</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-js-square"></i>
+                        <span>JavaScript</span>
+                    </div>
+                    <!-- Frameworks -->
+                    <div class="tech-item">
+                        <i class="fas fa-leaf"></i>
+                        <span>Spring Boot</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-bolt"></i>
+                        <span>FastAPI</span>
+                    </div>
+                    <!-- Databases -->
+                    <div class="tech-item">
+                        <i class="fas fa-database"></i>
+                        <span>PostgreSQL</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-database"></i>
+                        <span>MySQL</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-leaf"></i>
+                        <span>MongoDB</span>
+                    </div>
+                    <!-- Tools -->
+                    <div class="tech-item">
+                        <i class="fab fa-git-alt"></i>
+                        <span>Git</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-docker"></i>
+                        <span>Docker</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-cloud"></i>
+                        <span>AWS</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Power BI</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-robot"></i>
+                        <span>Automation</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-cogs"></i>
+                        <span>REST APIs</span>
+                    </div>
+                    <!-- Duplicate for seamless loop -->
+                    <div class="tech-item">
+                        <i class="fab fa-python"></i>
+                        <span>Python</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-java"></i>
+                        <span>Java</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-microsoft"></i>
+                        <span>C#/.NET</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-js-square"></i>
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-leaf"></i>
+                        <span>Spring Boot</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-bolt"></i>
+                        <span>FastAPI</span>
+                    </div>
                 </div>
-                <div class="project-content">
-                    <h3 class="project-title">Sistema de Análisis Ocupacional</h3>
-                    <p class="project-description">
-                        Dashboard automatizado para análisis de exámenes médicos en el sector minero. 
-                        Incluye pipelines ETL y visualizaciones interactivas que mejoraron la eficiencia 
-                        del proceso en un 60%.
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <h2 class="section-title" data-translate="about-title">Sobre Mí</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p data-translate="about-p1">
+                        Soy un desarrollador backend con una mentalidad orientada al crecimiento y la innovación. 
+                        Mi experiencia abarca desde la automatización de procesos complejos hasta el diseño de 
+                        arquitecturas escalables en los sectores financiero, minero y tributario.
                     </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Power BI</span>
-                        <span class="tech-tag">SQL</span>
-                        <span class="tech-tag">Pandas</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="#" class="project-link">Demo</a>
-                        <a href="#" class="project-link">Código</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-preview">
-                    <div class="project-icon">🌐</div>
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Portal Web Corporativo</h3>
-                    <p class="project-description">
-                        Sitio web corporativo desarrollado con Django y Vue.js. Integración completa con 
-                        APIs del Banco Central, sistema de autenticación JWT y panel de administración.
+                    <p data-translate="about-p2">
+                        Mi enfoque va más allá del código: busco entender cómo la tecnología puede resolver 
+                        problemas reales del negocio. Combino habilidades técnicas sólidas con una visión 
+                        estratégica para crear soluciones que realmente impacten en la eficiencia operacional.
                     </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Django</span>
-                        <span class="tech-tag">Vue.js</span>
-                        <span class="tech-tag">PostgreSQL</span>
-                        <span class="tech-tag">APIs REST</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="#" class="project-link">Demo</a>
-                        <a href="#" class="project-link">Código</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-preview">
-                    <div class="project-icon">💼</div>
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Software Tributario</h3>
-                    <p class="project-description">
-                        Aplicación desktop para cálculo de impuestos (RLI, IVA) desarrollada en .NET con MySQL. 
-                        Integración con SII y automatización de procesos contables mediante VBA.
+                    <p data-translate="about-p3">
+                        Actualmente curso mi último año de Ingeniería en Informática mientras trabajo como 
+                        Software Engineer, demostrando mi capacidad de adaptación y constante búsqueda de 
+                        crecimiento profesional.
                     </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">.NET</span>
-                        <span class="tech-tag">MySQL</span>
-                        <span class="tech-tag">VBA</span>
-                        <span class="tech-tag">WinForms</span>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <h3>2+</h3>
+                        <p data-translate="years-experience">Años de Experiencia</p>
                     </div>
-                    <div class="project-actions">
-                        <a href="#" class="project-link">Demo</a>
-                        <a href="#" class="project-link">Código</a>
+                    <div class="stat-card">
+                        <h3>65%</h3>
+                        <p data-translate="efficiency-improvement">Mejora en Eficiencia</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contacto -->
-    <section class="section fade-in" id="contact">
-        <div class="section-header">
-            <div class="section-number">05.</div>
-            <h2 class="section-title">Conectemos</h2>
+    <!-- Experience Section -->
+    <section class="section experience" id="experience">
+        <div class="container">
+            <h2 class="section-title" data-translate="experience-title">Experiencia Profesional</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker current"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 data-translate="current-job-title">Software Engineer</h3>
+                            <span class="company" data-translate="current-company">Ara y Bustamante Consultores</span>
+                            <span class="period" data-translate="current-period">Sep 2024 - Presente</span>
+                        </div>
+                        <ul class="timeline-achievements">
+                            <li data-translate="current-achievement-1">Diseñé arquitectura segura y escalable integrando web corporativa con portal de aplicaciones</li>
+                            <li data-translate="current-achievement-2">Desarrollé Bot automatizado del SII y app de conversión de divisas en tiempo real</li>
+                            <li data-translate="current-achievement-3">Transformé infraestructura de datos migrando de Excel a MySQL</li>
+                            <li data-translate="current-achievement-4">Lideré adopción tecnológica capacitando equipos en CRM Zoho</li>
+                        </ul>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Spring Boot</span>
+                            <span class="tech-tag">.NET</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">Zoho</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 data-translate="previous-job-title">Data Analyst & Process Automation Specialist</h3>
+                            <span class="company" data-translate="previous-company">Sodexo Chile</span>
+                            <span class="period" data-translate="previous-period">Ago 2023 - Ago 2024</span>
+                        </div>
+                        <ul class="timeline-achievements">
+                            <li data-translate="previous-achievement-1">Implementé soluciones automatizadas que mejoraron la eficiencia en 65%</li>
+                            <li data-translate="previous-achievement-2">Desarrollé algoritmos de limpieza de datos con Pandas y VBA</li>
+                            <li data-translate="previous-achievement-3">Colaboré con equipos multidisciplinarios optimizando flujos de información</li>
+                        </ul>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">SQL</span>
+                            <span class="tech-tag">Power BI</span>
+                            <span class="tech-tag">Pandas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="contact-content">
-            <p class="contact-description">
-                ¿Tienes un proyecto interesante en mente? Me encantaría conocer más sobre él. 
-                Siempre estoy abierto a nuevas oportunidades y colaboraciones.
-            </p>
-            
-            <div class="contact-grid">
-                <div class="contact-item">
-                    <div class="contact-icon">@</div>
-                    <div class="contact-label">EMAIL</div>
-                    <div class="contact-value">
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section skills" id="skills">
+        <div class="container">
+            <h2 class="section-title" data-translate="skills-title">Competencias Técnicas</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3 data-translate="backend-title">Backend & APIs</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">Spring Boot</span>
+                        <span class="skill-item">.NET</span>
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">REST APIs</span>
+                        <span class="skill-item">Webpay Integration</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 data-translate="database-title">Bases de Datos</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">PostgreSQL</span>
+                        <span class="skill-item">MySQL</span>
+                        <span class="skill-item">MongoDB</span>
+                        <span class="skill-item">SQL Optimization</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 data-translate="enterprise-title">Sistemas Empresariales</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">SAP</span>
+                        <span class="skill-item">Zoho ONE</span>
+                        <span class="skill-item">Defontana</span>
+                        <span class="skill-item">CRM Implementation</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 data-translate="analysis-title">Análisis & Visualización</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">Power BI</span>
+                        <span class="skill-item">Python Analytics</span>
+                        <span class="skill-item">Excel Avanzado</span>
+                        <span class="skill-item">Data Mining</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 data-translate="methodology-title">Metodologías</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">Scrum</span>
+                        <span class="skill-item">BPMN</span>
+                        <span class="skill-item">Desarrollo Ágil</span>
+                        <span class="skill-item">DevOps</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section projects" id="projects">
+        <div class="container">
+            <h2 class="section-title" data-translate="projects-title">Proyectos Destacados</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 data-translate="project1-title">Bot Automatizado SII</h3>
+                    <p data-translate="project1-description">
+                        Automatización de procesos tributarios que reduce significativamente los tiempos 
+                        de gestión y mejora la precisión en la extracción de documentos fiscales.
+                    </p>
+                    <div class="project-tags">
+                        <span>Python</span>
+                        <span>API SII</span>
+                        <span>Automation</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3 data-translate="project2-title">Conversor de Divisas</h3>
+                    <p data-translate="project2-description">
+                        Aplicación en tiempo real que utiliza APIs del Banco Central para conversión 
+                        de divisas con interfaz intuitiva y datos actualizados.
+                    </p>
+                    <div class="project-tags">
+                        <span>API REST</span>
+                        <span>Real-time</span>
+                        <span>Financial Data</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 data-translate="project3-title">Migración de Datos</h3>
+                    <p data-translate="project3-description">
+                        Transformación completa de infraestructura de datos desde Excel a MySQL, 
+                        mejorando integridad y velocidad de consultas para análisis empresarial.
+                    </p>
+                    <div class="project-tags">
+                        <span>MySQL</span>
+                        <span>Data Migration</span>
+                        <span>Performance</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2 class="section-title" data-translate="contact-title">Conectemos</h2>
+            <div class="contact-content">
+                <div class="contact-text">
+                    <p data-translate="contact-description">
+                        ¿Tienes un proyecto interesante? ¿Buscas alguien que combine habilidades técnicas 
+                        con visión de negocio? Hablemos sobre cómo puedo contribuir a tu equipo.
+                    </p>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
                         <a href="mailto:Rojascofrem@gmail.com">Rojascofrem@gmail.com</a>
                     </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">💼</div>
-                    <div class="contact-label">LINKEDLN</div>
-                    <div class="contact-value">
-                        <a href="#" target="_blank">linkedin.com/in/matiascofre</a>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+56958444125">+569 58444125</a>
                     </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">💻</div>
-                    <div class="contact-label">GITHUB</div>
-                    <div class="contact-value">
-                        <a href="#" target="_blank">github.com/matiascofre</a>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Santiago, Chile</span>
                     </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">📱</div>
-                    <div class="contact-label">TELÉFONO</div>
-                    <div class="contact-value">
-                        <a href="tel:+56958444125">+569 5844 4125</a>
+                    <div class="contact-socials">
+                        <a href="#" class="social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1295,270 +467,13 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p class="footer-text">© 2025 Matías Cofré. Desarrollado con ❤️ y mucho ☕</p>
+        <div class="container">
+            <p data-translate="footer-text">&copy; 2024 Matías Cofré. Construido con pasión y código limpio.</p>
+        </div>
     </footer>
 
-    <script>
-        // ===== INICIALIZACIÓN =====
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeScrollAnimations();
-            initializeNavigation();
-            initializeCursor();
-            initializeSmoothScrolling();
-        });
-
-        // ===== ANIMACIONES DE SCROLL =====
-        function initializeScrollAnimations() {
-            const observerOptions = {
-                threshold: 0.15,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        
-                        // Animaciones específicas
-                        if (entry.target.classList.contains('skills-grid')) {
-                            animateSkills(entry.target);
-                        }
-                        
-                        if (entry.target.classList.contains('projects-grid')) {
-                            animateProjects(entry.target);
-                        }
-                    }
-                });
-            }, observerOptions);
-
-            // Observar elementos con animaciones
-            document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
-                observer.observe(el);
-            });
-
-            // Observar grids para animaciones específicas
-            document.querySelectorAll('.skills-grid, .projects-grid').forEach(el => {
-                observer.observe(el);
-            });
-        }
-
-        // ===== NAVEGACIÓN =====
-        function initializeNavigation() {
-            const nav = document.getElementById('navigation');
-            let lastScrollTop = 0;
-
-            window.addEventListener('scroll', () => {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                
-                // Mostrar navegación después de scroll
-                if (scrollTop > 100) {
-                    nav.classList.add('visible');
-                } else {
-                    nav.classList.remove('visible');
-                }
-                
-                lastScrollTop = scrollTop;
-            });
-        }
-
-        //===== CURSOR PERSONALIZADO =====
-        function initializeCursor() {
-            const dot = document.querySelector('.cursor-dot');
-            const outline = document.querySelector('.cursor-outline');
-            
-            if (!dot || !outline) return;
-
-            let mouseX = 0;
-            let mouseY = 0;
-            let outlineX = 0;
-            let outlineY = 0;
-
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                
-                dot.style.left = mouseX + 'px';
-                dot.style.top = mouseY + 'px';
-            });
-
-            // Animación suave para el outline
-            function animateOutline() {
-                const distX = mouseX - outlineX;
-                const distY = mouseY - outlineY;
-                
-                outlineX += distX * 0.1;
-                outlineY += distY * 0.1;
-                
-                outline.style.left = outlineX + 'px';
-                outline.style.top = outlineY + 'px';
-                
-                requestAnimationFrame(animateOutline);
-            }
-            
-            animateOutline();
-
-            // Efectos en hover
-            document.querySelectorAll('a, button, .skill-item, .project-card').forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    dot.style.transform = 'scale(2)';
-                    outline.style.transform = 'scale(1.5)';
-                });
-                
-                el.addEventListener('mouseleave', () => {
-                    dot.style.transform = 'scale(1)';
-                    outline.style.transform = 'scale(1)';
-                });
-            });
-        }
-
-        // ===== SCROLL SUAVE =====
-        function initializeSmoothScrolling() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-        }
-
-        // ===== ANIMACIONES ESPECÍFICAS =====
-        function animateSkills(container) {
-            const categories = container.querySelectorAll('.skill-category');
-            
-            categories.forEach((category, index) => {
-                setTimeout(() => {
-                    category.style.opacity = '0';
-                    category.style.transform = 'translateY(20px)';
-                    category.style.transition = 'all 0.6s ease-out';
-                    
-                    setTimeout(() => {
-                        category.style.opacity = '1';
-                        category.style.transform = 'translateY(0)';
-                    }, 100);
-                }, index * 100);
-            });
-        }
-
-        function animateProjects(container) {
-            const projects = container.querySelectorAll('.project-card');
-            
-            projects.forEach((project, index) => {
-                setTimeout(() => {
-                    project.style.opacity = '0';
-                    project.style.transform = 'translateY(30px) scale(0.9)';
-                    project.style.transition = 'all 0.8s ease-out';
-                    
-                    setTimeout(() => {
-                        project.style.opacity = '1';
-                        project.style.transform = 'translateY(0) scale(1)';
-                    }, 100);
-                }, index * 150);
-            });
-        }
-
-        // ===== EFECTOS DE TECLADO =====
-        document.addEventListener('keydown', (e) => {
-            // Efecto de escritura en el hero
-            if (e.key === 'Enter' && document.activeElement.closest('.hero')) {
-                const cta = document.querySelector('.hero-cta');
-                if (cta) cta.click();
-            }
-        });
-
-        // ===== EASTER EGG - KONAMI CODE =====
-        let konamiCode = [];
-        const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
-
-        document.addEventListener('keydown', (e) => {
-            konamiCode.push(e.keyCode);
-            if (konamiCode.length > konamiSequence.length) {
-                konamiCode.shift();
-            }
-            
-            if (konamiCode.join(',') === konamiSequence.join(',')) {
-                activateDevMode();
-                konamiCode = [];
-            }
-        });
-
-        function activateDevMode() {
-            // Cambiar tema temporalmente
-            document.documentElement.style.setProperty('--color-accent', '#ff6b35');
-            document.documentElement.style.setProperty('--color-background', '#001122');
-            
-            // Mostrar mensaje
-            const message = document.createElement('div');
-            message.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: var(--color-surface);
-                color: var(--color-text-primary);
-                padding: 2rem;
-                border-radius: 8px;
-                border: 1px solid var(--color-accent);
-                font-family: var(--font-mono);
-                z-index: 10000;
-                text-align: center;
-                box-shadow: var(--glow-strong);
-            `;
-            message.innerHTML = '🎉 MODO DESARROLLADOR ACTIVADO 🎉<br><small>$ sudo rm -rf /imposter_syndrome</small>';
-            document.body.appendChild(message);
-            
-            setTimeout(() => {
-                message.remove();
-                // Restaurar tema original
-                document.documentElement.style.setProperty('--color-accent', '#00d4ff');
-                document.documentElement.style.setProperty('--color-background', '#0f0f0f');
-            }, 3000);
-        }
-
-        // ===== OPTIMIZACIONES DE RENDIMIENTO =====
-        
-        // Throttle para eventos de scroll
-        function throttle(func, limit) {
-            let inThrottle;
-            return function() {
-                const args = arguments;
-                const context = this;
-                if (!inThrottle) {
-                    func.apply(context, args);
-                    inThrottle = true;
-                    setTimeout(() => inThrottle = false, limit);
-                }
-            }
-        }
-
-        // Debounce para resize
-        function debounce(func, wait) {
-            let timeout;
-            return function() {
-                const context = this;
-                const args = arguments;
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(context, args), wait);
-            };
-        }
-
-        // Lazy loading de efectos pesados
-        window.addEventListener('load', () => {
-            // Inicializar efectos adicionales después del load
-            setTimeout(() => {
-                document.body.classList.add('loaded');
-            }, 500);
-        });
-
-        // Log de estado
-        console.log('%c✨ Portfolio cargado exitosamente', 'color: #00d4ff; font-size: 14px; font-weight: bold;');
-        console.log('%c💡 Tip: Prueba el código Konami para una sorpresa', 'color: #666; font-size: 12px;');
-    </script>
+    <!-- Scripts -->
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
