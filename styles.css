@@ -198,13 +198,17 @@ a:hover {
    Hero Section - Programming Theme
    =============================== */
 .hero {
-  margin-left: 100px;
+  /* margin-left: 100px; */
   min-height: 100vh;
   display: flex;
   align-items: center;
   background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
   position: relative;
   overflow: hidden;
+}
+
+.hero-text{
+  margin-left: 80px;
 }
 
 .hero::before {
@@ -369,6 +373,25 @@ a:hover {
 
 .tab i {
   font-size: 0.9rem;
+}
+
+.tab {
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.tab:hover {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Code Tab Content */
+.code-tab {
+  display: none;
+}
+
+.code-tab.active {
+  display: flex;
 }
 
 .editor-controls {
@@ -576,9 +599,10 @@ a:hover {
 
 /* Floating Card (Hero Visual) */
 .hero-visual {
+  margin-left: 250px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   animation: fadeInRight 1s ease-out 0.8s both;
 }
 

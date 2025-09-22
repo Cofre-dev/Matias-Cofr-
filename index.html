@@ -13,7 +13,7 @@
     <meta name="twitter:title" content="Matías Cofré - Software Engineer">
     <meta name="twitter:description" content="Backend Developer especializado en Python, Java, Spring Boot y automatización de procesos empresariales.">
 
-    <title>Matías Cofré - Software Engineer & Backend Developer | Ingeniero Informática Chile</title>
+    <title>Matías Cofré</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     
@@ -30,6 +30,7 @@
     <!-- Header Navigation -->
     <header class="header">
         <nav class="nav">
+
             <div class="nav-brand">
                 <!-- <h2 data-translate="name">Matías Cofré</h2> -->
             </div>
@@ -51,6 +52,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="code-rain"></div>
+        
         <div class="hero-content">
             <div class="hero-text">
                 <div class="terminal-window">
@@ -81,11 +83,6 @@
                         </div>
                     </div>
                 </div>
-                <p class="hero-description" data-translate="hero-description">
-                    Ingeniero en Informática con 2+ años de experiencia en desarrollo Backend y automatización de procesos empresariales.
-                    He logrado reducir tiempos operativos en 65% y automatizado +20 procesos críticos para empresas del sector financiero y minero.
-                    Especialista en Python, Java, Spring Boot, APIs REST y bases de datos MySQL/PostgreSQL.
-                </p>
                 <br>
                 <div class="hero-buttons">
                     <a href="#contact" class="btn btn-primary" data-translate="hero-contact">Contacto</a>
@@ -101,33 +98,131 @@
                 <div class="code-editor">
                     <div class="editor-header">
                         <div class="editor-tabs">
-                            <div class="tab active">
+                            <div class="tab active" data-lang="python">
                                 <i class="fab fa-python"></i>
                                 <span>main.py</span>
                             </div>
-                        </div>
-                        <div class="editor-controls">
-                            <i class="fas fa-search"></i>
-                            <i class="fas fa-cog"></i>
+                            <div class="tab" data-lang="java">
+                                <i class="fab fa-java"></i>
+                                <span>Main.java</span>
+                            </div>
+                            <div class="tab" data-lang="csharp">
+                                <i class="fab fa-microsoft"></i>
+                                <span>Program.cs</span>
+                            </div>
                         </div>
                     </div>
                     <div class="editor-content">
-
-                        <div class="line-numbers">
-                            <span>1</span> <span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                        <!-- Python Code -->
+                        <div class="code-tab active" id="python-code">
+                            <div class="line-numbers">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>5</span>
+                                <span>6</span>
+                                <span>7</span>
+                                <span>8</span>
+                                <span>9</span>
+                                <span>10</span>
+                                <span>11</span>
+                                <span>12</span>
+                            </div>
+                            <div class="code-content">
+                                <span class="code-line"><span class="keyword">class</span> <span class="class-name">BackendDeveloper</span>:</span>
+                                <span class="code-line">    <span class="keyword">def</span> <span class="function">__init__</span>(self):</span>
+                                <span class="code-line">        self.name = <span class="string">"Matías Cofré"</span></span>
+                                <span class="code-line">        self.languages = [</span>
+                                <span class="code-line">            <span class="string">"Python"</span>, <span class="string">"Java"</span>, <span class="string">"C#"</span></span>
+                                <span class="code-line">        ]</span>
+                                <span class="code-line">        self.frameworks = [</span>
+                                <span class="code-line">            <span class="string">"FastAPI"</span>, <span class="string">"Django"</span></span>
+                                <span class="code-line">        ]</span>
+                                <span class="code-line">        self.specialty = <span class="string">"Backend APIs"</span></span>
+                                <span class="code-line">        self.experience = <span class="string">"2+ years"</span></span>
+                                <span class="code-line">        self.passion = <span class="string">"∞"</span></span>
+                            </div>
                         </div>
 
-                        <div class="code-content">
-                            <span class="code-line"><span class="keyword">class</span><span class="class-name">BackendDeveloper</span>:</span>
-                            <span class="code-line">    <span class="keyword">def</span> <span class="function">__init__</span>(self):</span>
-                            <span class="code-line">        self.name = <span class="string">"Matías Cofré"</span></span>
-                            <span class="code-line">        self.languages = [</span>
-                            <span class="code-line">            <span class="string">"Python"</span>, <span class="string">"Java"</span>, <span class="string">"C#"</span>, <span class="string">"SQL"</span></span>
-                            <span class="code-line">        ]</span>
-                            <span class="code-line">        self.frameworks = [</span>
-                            <span class="code-line">            <span class="string">"Spring Boot"</span>, <span class="string">".NET"</span>, <span class="string">"FastAPI"</span></span>
-                            <span class="code-line">        ]</span>
-                            <span class="code-line">        self.ambition = <span class="string">"∞"</span></span>
+                        <!-- Java Code -->
+                        <div class="code-tab" id="java-code">
+                            <div class="line-numbers">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>5</span>
+                                <span>6</span>
+                                <span>7</span>
+                                <span>8</span>
+                                <span>9</span>
+                                <span>10</span>
+                                <span>11</span>
+                                <span>12</span>
+                                <span>13</span>
+                                <span>14</span>
+                                <span>15</span>
+                            </div>
+                            <div class="code-content">
+                                <span class="code-line"><span class="keyword">public class</span> <span class="class-name">BackendDeveloper</span> {</span>
+                                <span class="code-line">    <span class="keyword">private</span> String name;</span>
+                                <span class="code-line">    <span class="keyword">private</span> List&lt;String&gt; languages;</span>
+                                <span class="code-line">    <span class="keyword">private</span> List&lt;String&gt; frameworks;</span>
+                                <span class="code-line"></span>
+                                <span class="code-line">    <span class="keyword">public</span> <span class="function">BackendDeveloper</span>() {</span>
+                                <span class="code-line">        this.name = <span class="string">"Matías Cofré"</span>;</span>
+                                <span class="code-line">        this.languages = Arrays.asList(</span>
+                                <span class="code-line">            <span class="string">"Java"</span>, <span class="string">"Python"</span>, <span class="string">"SQL"</span></span>
+                                <span class="code-line">        );</span>
+                                <span class="code-line">        this.frameworks = Arrays.asList(</span>
+                                <span class="code-line">            <span class="string">"Spring Boot"</span>, <span class="string">"Spring Security"</span></span>
+                                <span class="code-line">        );</span>
+                                <span class="code-line">    }</span>
+                                <span class="code-line">}</span>
+                            </div>
+                        </div>
+
+                        <!-- C# Code -->
+                        <div class="code-tab" id="csharp-code">
+                            <div class="line-numbers">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>5</span>
+                                <span>6</span>
+                                <span>7</span>
+                                <span>8</span>
+                                <span>9</span>
+                                <span>10</span>
+                                <span>11</span>
+                                <span>12</span>
+                                <span>13</span>
+                                <span>14</span>
+                                <span>15</span>
+                            </div>
+                            <div class="code-content">
+                                <span class="code-line"><span class="keyword">public class</span> <span class="class-name">BackendDeveloper</span></span>
+                                <span class="code-line">{</span>
+                                <span class="code-line">    <span class="keyword">public string</span> Name { <span class="keyword">get</span>; <span class="keyword">set</span>; }</span>
+                                <span class="code-line">    <span class="keyword">public</span> List&lt;<span class="keyword">string</span>&gt; Languages { <span class="keyword">get</span>; <span class="keyword">set</span>; }</span>
+                                <span class="code-line">    <span class="keyword">public</span> List&lt;<span class="keyword">string</span>&gt; Frameworks { <span class="keyword">get</span>; <span class="keyword">set</span>; }</span>
+                                <span class="code-line"></span>
+                                <span class="code-line">    <span class="keyword">public</span> <span class="function">BackendDeveloper</span>()</span>
+                                <span class="code-line">    {</span>
+                                <span class="code-line">        Name = <span class="string">"Matías Cofré"</span>;</span>
+                                <span class="code-line">        Languages = <span class="keyword">new</span> List&lt;<span class="keyword">string</span>&gt;</span>
+                                <span class="code-line">        {</span>
+                                <span class="code-line">            <span class="string">"C#"</span>, <span class="string">"Python"</span>, <span class="string">"SQL"</span></span>
+                                <span class="code-line">        };</span>
+                                <span class="code-line">        Frameworks = <span class="keyword">new</span> List&lt;<span class="keyword">string</span>&gt;</span>
+                                <span class="code-line">        {</span>
+                                <span class="code-line">            <span class="string">".NET Core"</span>, <span class="string">"ASP.NET"</span></span>
+                                <span class="code-line">        };</span>
+                                <span class="code-line">    }</span>
+                                <span class="code-line">}</span>
+                            </div>
                         </div>
                     </div>
                     <div class="typing-indicator">

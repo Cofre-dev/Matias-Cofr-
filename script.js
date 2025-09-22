@@ -19,6 +19,7 @@ class PortfolioManager {
         this.initializeTechCarousel();
         this.initializeParticleSystem();
         this.initializeAdvancedAnimations();
+        this.initializeCodeTabs();
     }
 
     initializeTheme() {
@@ -520,6 +521,39 @@ class PortfolioManager {
             parallaxElements.forEach(element => {
                 const rate = scrolled * -0.3;
                 element.style.transform = `translateY(${rate}px)`;
+            });
+        });
+    }
+
+    // ===============================
+    // Code Tabs Functionality
+    // ===============================
+    initializeCodeTabs() {
+        const tabs = document.querySelectorAll('.tab[data-lang]');
+        const codeTabs = document.querySelectorAll('.code-tab');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetLang = tab.getAttribute('data-lang');
+
+                // Remove active class from all tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                codeTabs.forEach(ct => ct.classList.remove('active'));
+
+                // Add active class to clicked tab
+                tab.classList.add('active');
+
+                // Show corresponding code tab
+                const targetCodeTab = document.getElementById(`${targetLang}-code`);
+                if (targetCodeTab) {
+                    targetCodeTab.classList.add('active');
+                }
+
+                // Add subtle animation
+                tab.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    tab.style.transform = 'scale(1)';
+                }, 150);
             });
         });
     }
