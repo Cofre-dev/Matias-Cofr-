@@ -17,6 +17,8 @@ class PortfolioManager {
         this.initializeIntersectionObserver();
         this.initializeCodeRain();
         this.initializeTechCarousel();
+        this.initializeParticleSystem();
+        this.initializeAdvancedAnimations();
     }
 
     initializeTheme() {
@@ -54,7 +56,7 @@ class PortfolioManager {
         const savedLanguage = 'es';
         this.setLanguage(savedLanguage);
     }
-9
+
     setLanguage(language) {
         this.currentLanguage = language;
         this.updateLanguageDisplay();
@@ -97,9 +99,6 @@ class PortfolioManager {
         });
     }
 
-    // ===============================
-    // Event Listeners
-    // ===============================
     bindEventListeners() {
         // Theme toggle
         const themeToggle = document.getElementById('themeToggle');
@@ -286,27 +285,9 @@ class PortfolioManager {
         });
     }
 
-    // Add smooth hover effects
-    initializeHoverEffects() {
-        // Add magnetic effect to buttons
-        document.querySelectorAll('.btn, .social-link').forEach(button => {
-            button.addEventListener('mousemove', (e) => {
-                const rect = button.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                
-                button.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
-            });
-            
-            button.addEventListener('mouseleave', () => {
-                button.style.transform = '';
-            });
-        });
-    }
 
     // Performance optimization: Throttled scroll handler
     throttle(func, wait) {
-
         let timeout;
         return function executedFunction(...args) {
             const later = () => {
@@ -316,6 +297,231 @@ class PortfolioManager {
             clearTimeout(timeout);
             timeout = setTimeout(later, wait);
         };
+    }
+
+    // ===============================
+    // Code Rain Effect
+    // ===============================
+    initializeCodeRain() {
+        const codeRain = document.querySelector('.code-rain');
+        if (!codeRain) return;
+
+        const characters = 'abcdefghijklmnopqrstuvwxyz0123456789</>{}[]()';
+        const columns = Math.floor(window.innerWidth / 20);
+
+        for (let i = 0; i < columns; i++) {
+            const column = document.createElement('div');
+            column.style.cssText = `
+                position: absolute;
+                left: ${i * 20}px;
+                animation: codeRainFall ${Math.random() * 3 + 2}s linear infinite;
+                animation-delay: ${Math.random() * 2}s;
+                color: var(--primary);
+                font-family: var(--font-mono);
+                font-size: 16px;
+                opacity: 0.8;
+                font-weight: 600;
+            `;
+
+            let text = '';
+            for (let j = 0; j < 20; j++) {
+                text += characters.charAt(Math.floor(Math.random() * characters.length)) + '<br>';
+            }
+            column.innerHTML = text;
+            codeRain.appendChild(column);
+        }
+    }
+
+    // ===============================
+    // Tech Carousel Implementation
+    // ===============================
+    initializeTechCarousel() {
+        const carousel = document.querySelector('.tech-carousel');
+        const track = document.querySelector('.tech-track');
+
+        if (!carousel || !track) return;
+
+        // Clone items for seamless loop
+        const items = track.querySelectorAll('.tech-item');
+        items.forEach(item => {
+            const clone = item.cloneNode(true);
+            track.appendChild(clone);
+        });
+
+        // Add hover pause functionality
+        track.addEventListener('mouseenter', () => {
+            track.style.animationPlayState = 'paused';
+        });
+
+        track.addEventListener('mouseleave', () => {
+            track.style.animationPlayState = 'running';
+        });
+    }
+
+    // ===============================
+    // Terminal Typing Effect
+    // ===============================
+    initializeTerminalTyping() {
+        const commands = document.querySelectorAll('.command');
+
+        commands.forEach((command, index) => {
+            const text = command.textContent;
+            command.textContent = '';
+
+            const typeCommand = () => {
+                let i = 0;
+                const typing = setInterval(() => {
+                    if (i < text.length) {
+                        command.textContent += text.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(typing);
+                    }
+                }, 100);
+            };
+
+            setTimeout(typeCommand, (index + 1) * 1000);
+        });
+    }
+
+    // ===============================
+    // Code Editor Enhancements
+    // ===============================
+    initializeCodeEditor() {
+        const codeLines = document.querySelectorAll('.code-line');
+
+        codeLines.forEach((line, index) => {
+            line.style.opacity = '0';
+            line.style.transform = 'translateX(-20px)';
+            line.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+
+            setTimeout(() => {
+                line.style.opacity = '1';
+                line.style.transform = 'translateX(0)';
+            }, index * 200 + 2000);
+        });
+    }
+
+    // ===============================
+    // Particle System
+    // ===============================
+    initializeParticleSystem() {
+        const hero = document.querySelector('.hero');
+        if (!hero) return;
+
+        const particleContainer = document.createElement('div');
+        particleContainer.className = 'particle-container';
+        particleContainer.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        `;
+        hero.appendChild(particleContainer);
+
+        // Create floating particles
+        for (let i = 0; i < 30; i++) {
+            this.createParticle(particleContainer);
+        }
+    }
+
+    createParticle(container) {
+        const particle = document.createElement('div');
+        const symbols = ['⚡', '💎', '🔮', '✨', '⭐', '🌟', '💫'];
+        const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+
+        particle.innerHTML = symbol;
+        particle.style.cssText = `
+            position: absolute;
+            font-size: ${Math.random() * 20 + 10}px;
+            left: ${Math.random() * 100}%;
+            animation: particle ${Math.random() * 20 + 10}s linear infinite;
+            animation-delay: ${Math.random() * 5}s;
+            opacity: 0.6;
+        `;
+
+        container.appendChild(particle);
+
+        // Remove and recreate particle after animation
+        setTimeout(() => {
+            if (particle.parentNode) {
+                particle.parentNode.removeChild(particle);
+                this.createParticle(container);
+            }
+        }, (Math.random() * 20 + 10) * 1000);
+    }
+
+    // ===============================
+    // Advanced Animations
+    // ===============================
+    initializeAdvancedAnimations() {
+        // Staggered animations for skill items
+        const skillItems = document.querySelectorAll('.skill-item');
+        skillItems.forEach((item, index) => {
+            item.style.animation = `slideInFromBottom 0.6s ease forwards`;
+            item.style.animationDelay = `${index * 0.1}s`;
+            item.style.opacity = '0';
+        });
+
+        // Bouncing animation for tech items
+        const techItems = document.querySelectorAll('.tech-item');
+        techItems.forEach((item, index) => {
+            item.addEventListener('mouseenter', () => {
+                item.style.animation = 'bounceIn 0.6s ease';
+            });
+
+            item.addEventListener('animationend', () => {
+                item.style.animation = '';
+            });
+        });
+
+        // Section reveal animations
+        this.setupSectionReveal();
+    }
+
+    setupSectionReveal() {
+        const sections = document.querySelectorAll('.section');
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('section-revealed');
+
+                    // Animate children with stagger
+                    const children = entry.target.querySelectorAll('.project-card, .skill-category, .timeline-item');
+                    children.forEach((child, index) => {
+                        setTimeout(() => {
+                            child.style.animation = 'slideInFromBottom 0.8s ease forwards';
+                        }, index * 150);
+                    });
+                }
+            });
+        }, { threshold: 0.2 });
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+    }
+
+
+
+    // ===============================
+    // Enhanced Scroll Effects
+    // ===============================
+    initializeParallaxElements() {
+        const parallaxElements = document.querySelectorAll('.hero-visual, .code-editor');
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+
+            parallaxElements.forEach(element => {
+                const rate = scrolled * -0.3;
+                element.style.transform = `translateY(${rate}px)`;
+            });
+        });
     }
 }
 
@@ -329,9 +535,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize additional effects
     portfolio.initializeTypingEffect();
     portfolio.initializeParallax();
-    portfolio.initializeHoverEffects();
     portfolio.initializeTerminalTyping();
     portfolio.initializeCodeEditor();
+    portfolio.initializeParallaxElements();
     
     // Add loading animation completion
     document.body.classList.add('loaded');
