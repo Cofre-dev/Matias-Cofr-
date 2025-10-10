@@ -3,133 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Matías Cofré - Ingeniero en Informática y Software Engineer especializado en Backend Development, Automatización de Procesos, APIs REST, Python, Java, Spring Boot. Desarrollador Backend con 2+ años experiencia en Santiago, Chile.">
+    <meta name="description" content="Matías Cofré - Ingeniero en Informática y Software Engineer especializado en Backend Development, Automatización de Procesos, APIs REST, Python, Java, Spring Boot. Desarrollador Backend con 3+ años experiencia en Santiago, Chile.">
     <meta name="keywords" content="Software Engineer, Backend Developer, Ingeniero Informática, Python Developer, Java Developer, Spring Boot, API REST, Automatización Procesos, Desarrollador Santiago Chile, MySQL, PostgreSQL, .NET Developer, Programador Python, Desarrollador Backend Chile">
     <meta name="author" content="Matías Cofré">
     <meta property="og:title" content="Matías Cofré - Software Engineer & Backend Developer">
-    <meta property="og:description" content="Ingeniero en Informática especializado en Backend Development y automatización. 2+ años de experiencia creando soluciones tecnológicas eficientes.">
+    <meta property="og:description" content="Ingeniero en Informática especializado en Backend Development y automatización. 3+ años de experiencia creando soluciones tecnológicas eficientes.">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Matías Cofré - Software Engineer">
     <meta name="twitter:description" content="Backend Developer especializado en Python, Java, Spring Boot y automatización de procesos empresariales.">
 
-    <title>Matías Cofré</title>
+    <title>Matías Cofré - Software Engineer</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"> -->
-
-    <!--Importamos el logo del sol para el cambio de theme-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <!-- Header Navigation -->
+    <!-- Header Navigation --><
     <header class="header">
         <nav class="nav">
-
-            <div class="nav-brand">
-                <a href="#" class="brand-link">
-                    <div class="brand-logo">
-                        <span class="logo-bracket">&lt;</span>
-                        <span class="logo-text">MC</span>
-                        <span class="logo-bracket">/&gt;</span>
-                    </div>
-                    <div class="brand-info">
-                        <span class="brand-name">Matías Cofré</span>
-                        <span class="brand-role">Backend Developer</span>
-                    </div>
-                </a>
-            </div>
-
+            <div class="nav-brand"></div>
             <div class="nav-links">
-                <a href="#" class="nav-link">
-                    <span class="link-number">01.</span>
-                    <span class="link-text">Inicio</span>
-                </a>
-                <a href="#about" class="nav-link" data-translate="nav-about">
-                    <span class="link-number">02.</span>
-                    <span class="link-text">About</span>
-                </a>
-                <a href="#experience" class="nav-link" data-translate="nav-experience">
-                    <span class="link-number">03.</span>
-                    <span class="link-text">Experience</span>
-                </a>
-                <a href="#projects" class="nav-link" data-translate="nav-projects">
-                    <span class="link-number">04.</span>
-                    <span class="link-text">Projects</span>
-                </a>
-                <a href="#skills" class="nav-link" data-translate="nav-skills">
-                    <span class="link-number">05.</span>
-                    <span class="link-text">Skills</span>
-                </a>
-                <a href="#contact" class="nav-link-cta" data-translate="nav-contact">
-                    <span>Contact</span>
-                </a>
+                <a href="#hero" data-translate="nav-home">Inicio</a>
+                <a href="#projects" data-translate="nav-projects">Proyectos</a>
+                <a href="#experience" data-translate="nav-experience">Experiencia</a>
+                <a href="#about" data-translate="nav-about">Sobre Mí</a>
+                <a href="#contact" data-translate="nav-contact">Contacto</a>
             </div>
-
             <div class="nav-controls">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <button class="theme-toggle" id="themeToggle">
                     <i class="fas fa-moon"></i>
                 </button>
-                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
             </div>
-
         </nav>
-
-        <!-- Mobile Menu -->
-        <div class="mobile-menu" id="mobileMenu">
-            <div class="mobile-menu-content">
-                <a href="#" class="mobile-nav-link">
-                    <span class="mobile-link-number">01.</span>
-                    <span>Inicio</span>
-                </a>
-                <a href="#about" class="mobile-nav-link">
-                    <span class="mobile-link-number">02.</span>
-                    <span>About</span>
-                </a>
-                <a href="#experience" class="mobile-nav-link">
-                    <span class="mobile-link-number">03.</span>
-                    <span>Experience</span>
-                </a>
-                <a href="#projects" class="mobile-nav-link">
-                    <span class="mobile-link-number">04.</span>
-                    <span>Projects</span>
-                </a>
-                <a href="#skills" class="mobile-nav-link">
-                    <span class="mobile-link-number">05.</span>
-                    <span>Skills</span>
-                </a>
-                <a href="#contact" class="mobile-nav-link mobile-nav-link-cta">
-                    <span>Contact</span>
-                </a>
-            </div>
-        </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="code-rain"></div>
-
-        <div class="hero-content" style="text-align: center; display: flex; justify-content: center; align-items: center; height: 100%; width: 100%;">
+        <div class="hero-content" style="text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; width: 100%;">
             <h1 class="hero-title">Matías Cofré</h1>
+            <p class="hero-subtitle" style="font-size: 1.5rem; color: #cad5d3; margin-top: 1rem; font-weight: 300;">
+                Software Engineer
+            </p>
         </div>
     </section>
 
     <!-- Tech Stack Carousel -->
     <section class="tech-carousel-section">
         <div class="container">
-            <h3 class="carousel-title" data-translate="tech-stack">Tecnologías que manejo</h3>
+            <h3 class="carousel-title" data-translate="tech-stack">Tecnologías que domino</h3>
             <div class="tech-carousel">
                 <div class="tech-track">
-                    <!-- Programming Languages -->
                     <div class="tech-item">
                         <i class="fab fa-python"></i>
                         <span>Python</span>
@@ -146,7 +74,6 @@
                         <i class="fab fa-js-square"></i>
                         <span>JavaScript</span>
                     </div>
-                    <!-- Frameworks -->
                     <div class="tech-item">
                         <i class="fas fa-leaf"></i>
                         <span>Spring Boot</span>
@@ -155,7 +82,6 @@
                         <i class="fas fa-bolt"></i>
                         <span>FastAPI</span>
                     </div>
-                    <!-- Databases -->
                     <div class="tech-item">
                         <i class="fas fa-database"></i>
                         <span>PostgreSQL</span>
@@ -168,7 +94,6 @@
                         <i class="fas fa-leaf"></i>
                         <span>MongoDB</span>
                     </div>
-                    <!-- Tools -->
                     <div class="tech-item">
                         <i class="fab fa-git-alt"></i>
                         <span>Git</span>
@@ -193,7 +118,7 @@
                         <i class="fas fa-cogs"></i>
                         <span>REST APIs</span>
                     </div>
-                    <!-- Duplicate for seamless loop -->
+                    <!-- Duplicado para loop -->
                     <div class="tech-item">
                         <i class="fab fa-python"></i>
                         <span>Python</span>
@@ -221,15 +146,15 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>    
 
-        <!-- Projects Section - Enhanced -->
+    <!-- Projects Section -->
     <section class="section projects" id="projects">
         <div class="container">
             <div class="projects-header">
                 <h2 class="section-title" data-translate="projects-title">Proyectos de Alto Impacto</h2>
                 <p class="projects-subtitle" data-translate="projects-subtitle">
-                    Soluciones Backend que han transformado la eficiencia operativa de empresas líderes
+                    Soluciones que han transformado la eficiencia operativa de empresas
                 </p>
             </div>
 
@@ -241,21 +166,21 @@
                             <i class="fas fa-shield-alt"></i>
                         </div>
                     </div>
-                    <h3>Portal de Clientes Exclusivos</h3>
+                    <h3>Portal de Clientes Corporativo</h3>
                     <p>
-                        <strong>Portal de clientes</strong> donde los clientes que tienen varias empresas pueden almacenar sus documentos de manera segura.
-                        Uso de JWT para la autenticación de los usuarios. El sistema cuenta con acceso de administradores y clientes,
-                        incluyendo sección de consultas con chat en tiempo real.
+                        <strong>Sistema de gestión documental seguro</strong> para empresas con múltiples razones sociales. 
+                        Implementa autenticación JWT, gestión de roles (admin/cliente), y sistema de consultas con 
+                        chat en tiempo real. Permite almacenamiento centralizado y acceso controlado a documentación empresarial.
                     </p>
-
                     <div class="project-tags">
                         <span>PHP</span>
                         <span>MySQL</span>
                         <span>JWT</span>
-                        <span>Chat System</span>
+                        <span>WebSocket</span>
+                        <span>Chat Real-time</span>
                     </div>
                     <div class="project-repository">
-                        <a href="https://github.com/Cofre-dev/webScrappingSii" target="_blank" rel="noopener noreferrer" class="repository-button">
+                        <a href="https://github.com/Cofre-dev/portal-clientes" target="_blank" rel="noopener noreferrer" class="repository-button">
                             <i class="fab fa-github"></i>
                             <span>Ver Repositorio</span>
                             <i class="fas fa-external-link-alt"></i>
@@ -270,16 +195,18 @@
                             <i class="fas fa-robot"></i>
                         </div>
                     </div>
-                    <h3>Bot Servicio de Impuestos Internos</h3>
+                    <h3>Bot Automatización Fiscal SII</h3>
                     <p>
-                        <strong>Bot que navega por el servicio de impuestos internos</strong> automatizando la gestión fiscal de la empresa.
-                        Desarrollado con JavaScript y Playwright, integra directamente con el SII. El usuario ingresa el RUT y clave tributaria,
-                        luego el bot rescata todas las compras y ventas de la empresa.
+                        <strong>Automatización RPA para Servicio de Impuestos Internos de Chile.</strong> 
+                        Bot desarrollado con Playwright que automatiza la extracción de compras y ventas fiscales. 
+                        El usuario ingresa credenciales tributarias y el sistema recupera automáticamente todos los 
+                        registros de compra/venta, ahorrando horas de trabajo manual mensual.
                     </p>
                     <div class="project-tags">
                         <span>JavaScript</span>
                         <span>Playwright</span>
                         <span>Web Scraping</span>
+                        <span>RPA</span>
                         <span>Automation</span>
                     </div>
                     <div class="project-repository">
@@ -291,21 +218,55 @@
                     </div>
                 </div>
 
-                <!-- Proyecto 3: API Divisas -->
+                <!-- Proyecto 3: ETL Financiero -->
                 <div class="project-card enhanced">
                     <div class="project-header">
                         <div class="project-icon">
-                            <i class="fas fa-exchange-alt"></i>
+                            <i class="fas fa-chart-line"></i>
                         </div>
                     </div>
-                    <h3 data-translate="project2-title">Extractor de datos de cartolas de inversiones</h3>
-                    <p data-translate="project2-description">
-                        <strong>ETL escrito en python</strong> Este proyecto lo que hace es extraer datos desde un pdf con <span>Camelot</span>, luego <span>Pandas</span> los transforma y exporta a excel para el uso de los usuarios. Cuenta con una interfaz amigable donde el usuario selecciona la cartola de <span>Larrain vial</span> (por ahora solo con soporte a Larrain Vial) y el sistema ejecuta el ETL para que se genere un archivo excel.
+                    <h3>Generador de informes de ventas</h3>
+                    <p>
+                        <strong>Herramienta de automatización empresarial</strong> que transforma datos de ventas 
+                        (CSV/Excel) en informes PDF profesionales con análisis visual mediante gráficos interactivos. 
+                        Incluye interfaz gráfica intuitiva, validación de datos y soporte para múltiples formatos.
+                    </p>
+                    <div class="project-tags">
+                        <span class="badge">Python</span>
+                        <span class="badge">Pandas</span>
+                        <span class="badge">Tkinter</span>
+                        <span class="badge">ReportLab</span>
+                        <span class="badge">Matplotlib</span>
+                    </div>
+                    <div class="project-repository">
+                        <a href="https://github.com/Cofre-dev/generador-informes" target="_blank" rel="noopener noreferrer" class="repository-button">
+                            <i class="fab fa-github"></i>
+                            <span>Ver Repositorio</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Proyecto 4: ETL Financiero -->
+                <div class="project-card enhanced">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <h3>ETL Automatizado de Cartolas de Inversión</h3>
+                    <p>
+                        <strong>Pipeline ETL para procesamiento de datos financieros.</strong> 
+                        Extrae datos de cartolas PDF usando Camelot, transforma la información con Pandas y 
+                        exporta a Excel. Interfaz intuitiva donde el usuario carga su cartola de Larrain Vial 
+                        y obtiene un archivo estructurado listo para análisis. Reduce tiempo de procesamiento de 2 horas a 30 segundos.
                     </p>
                     <div class="project-tags">
                         <span>Python</span>
                         <span>Camelot</span>
                         <span>Pandas</span>
+                        <span>ETL</span>
+                        <span>PDF Processing</span>
                     </div>
                     <div class="project-repository">
                         <a href="https://github.com/Cofre-dev/FinDataFlow" target="_blank" rel="noopener noreferrer" class="repository-button">
@@ -316,11 +277,59 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="projects-cta">
-                <h3>¿Interesado en resultados similares para tu empresa?</h3>
-                <p>Discutamos cómo puedo optimizar tus procesos y crear soluciones Backend de alto impacto</p>
-                <a href="#contact" class="btn btn-primary">Iniciar Conversación</a>
+    <!-- Experience Section -->
+    <section class="section experience" id="experience">
+        <div class="container">
+            <h2 class="section-title" data-translate="experience-title">Experiencia Profesional</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker current"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 data-translate="current-job-title">Software Engineer</h3>
+                            <span class="company" data-translate="current-company">Ara y Bustamante Consultores</span>
+                            <span class="period" data-translate="current-period">Sep 2024 - Presente</span>
+                        </div>
+                        <ul class="timeline-achievements">
+                            <li data-translate="current-achievement-1">Diseñé arquitectura segura y escalable integrando web corporativa con portal de aplicaciones</li>
+                            <li data-translate="current-achievement-2">Desarrollé Bot automatizado del SII y app de conversión de divisas en tiempo real</li>
+                            <li data-translate="current-achievement-3">Transformé infraestructura de datos migrando de Excel a MySQL, mejorando confiabilidad en 90%</li>
+                            <li data-translate="current-achievement-4">Lideré adopción tecnológica capacitando equipos en CRM Zoho, reduciendo tiempo de onboarding en 50%</li>
+                        </ul>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Spring Boot</span>
+                            <span class="tech-tag">.NET</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">Zoho</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 data-translate="previous-job-title">Data Analyst & Process Automation Specialist</h3>
+                            <span class="company" data-translate="previous-company">Sodexo Chile</span>
+                            <span class="period" data-translate="previous-period">Ago 2023 - Ago 2024</span>
+                        </div>
+                        <ul class="timeline-achievements">
+                            <li data-translate="previous-achievement-1">Implementé soluciones automatizadas que mejoraron la eficiencia operacional en 65%</li>
+                            <li data-translate="previous-achievement-2">Desarrollé algoritmos de limpieza y transformación de datos con Pandas y VBA</li>
+                            <li data-translate="previous-achievement-3">Colaboré con equipos multidisciplinarios optimizando flujos de información entre departamentos</li>
+                            <li data-translate="previous-achievement-4">Creé dashboards interactivos en Power BI para toma de decisiones ejecutivas</li>
+                        </ul>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">SQL</span>
+                            <span class="tech-tag">Power BI</span>
+                            <span class="tech-tag">Pandas</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -331,18 +340,18 @@
             <h2 class="section-title" data-translate="about-title">Sobre Mí</h2>
             <div class="about-content">
                 <!-- Profile Photo Section -->
-                <div class="about-profile">
+                <!-- <div class="about-profile">
                     <div class="profile-photo">
                         <img src="./mati.jpg" alt="Matías Cofré" />
                         <div class="profile-border"></div>
                     </div>
                     <div class="profile-intro">
-                        <h3 data-translate="profile-greeting">¡Hola Soy Matías!</h3>
+                        <h3 data-translate="profile-greeting">¡Hola, soy Matías!</h3>
                         <p data-translate="profile-tagline">
-                            Ingeniero en informática, apasionado por la programación.
+                            Ingeniero en Informática, apasionado por crear soluciones que impactan.
                         </p>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Professional Info Cards -->
                 <div class="professional-cards">
@@ -354,7 +363,8 @@
                             </div>
                             <div class="flip-card-back">
                                 <h4 data-translate="profession-detail">Ingeniero en Informática</h4>
-                                <p data-translate="profession-desc">Software Engineer</p>
+                                <!-- <p data-translate="profession-desc">Software Engineer</p> -->
+
                             </div>
                         </div>
                     </div>
@@ -367,7 +377,7 @@
                             </div>
                             <div class="flip-card-back">
                                 <h4 data-translate="location-detail">Santiago, Chile</h4>
-                                <!-- <p data-translate="location-desc">Disponiblel y remoto</p> -->
+                                <!-- <p data-translate="location-desc">Disponible presencial y remoto</p> -->
                             </div>
                         </div>
                     </div>
@@ -392,8 +402,8 @@
                                 <h4 data-translate="education-label">Educación</h4>
                             </div>
                             <div class="flip-card-back">
-                                <h4 data-translate="education-detail">Ingenieria en informática</h4>
-                                <!-- <p data-translate="education-desc">Universidad en curso</p> -->
+                                <h4 data-translate="education-detail">Ingeniería en Informática</h4>
+                                <!-- <p data-translate="education-desc">Titulado</p> -->
                             </div>
                         </div>
                     </div>
@@ -416,46 +426,38 @@
                 <div class="about-description">
                     <div class="about-text">
                         <h3 class="about-subtitle">Mi Historia</h3>
-                        <p data-translate="about-p1">
-                            Desde niño siempre me interesaba por cómo funcionaban las cosas. Pasaba horas jugando videojuegos, explorando cómo había "vida" dentro de la pantalla. Esta curiosidad por los sistemas fue el punto de partida de mi camino a la tecnología. 
-                            Con el tiempo, esa inquietud natural se transformo en una pasión por resolver problemas, primero fue con matematicas, sin embargo me costaban más que a mis compañeros, siempre tuve talento natural para lo humanista, sin embargo mi interés por las matematicas eran mayores. Estudiar ingenieríe en informatica me permitio unir la lógica con la creatividad, y descubrir en la programación una herramienta poderosa para transformar ideas en soluciones reales.b 
+                        <p>
+                            Desde pequeño me fascinaba entender cómo funcionaban las cosas. Lo que comenzó como curiosidad por los videojuegos se transformó en una pasión por resolver problemas a través de la tecnología.
                         </p>
-                        <p data-translate="about-p2">
-                            Mi enfoque va más allá del código: busco entender cómo la tecnología puede resolver
-                            problemas reales del negocio. Combino habilidades técnicas sólidas con una visión
-                            estratégica para crear soluciones que realmente impacten en la eficiencia operacional.
+                        <p>
+                            Estudiar Ingeniería en Informática me permitió unir la lógica con la creatividad. Aunque las matemáticas no eran mi fuerte natural, mi persistencia me llevó a dominarlas y aplicarlas en la programación. Hoy, transformo problemas complejos en soluciones elegantes que realmente impactan en los negocios.
                         </p>
-
-                        <!-- <h3 class="about-subtitle">¿Qué me apasiona?</h3>
-                        <p data-translate="about-p3">
-                            Me encanta resolver problemas complejos y ver cómo la tecnología transforma procesos que antes
-                            tomaban horas en tareas que se completan en minutos. La automatización no es solo código para mí,
-                            es mejorar la calidad de vida de las personas que trabajan con esos sistemas día a día.
+                        <!-- <p>
+                            Mi enfoque va más allá del código: busco entender el negocio, identificar puntos críticos y crear soluciones que mejoren la eficiencia operacional de manera medible y sostenible.
                         </p> -->
-
-                        <h3 class="about-subtitle">Más allá del código</h3>
-                        <p data-translate="about-p4">
-                            Cuando no estoy programando, disfruto aprender nuevas tecnologías y mantenerme actualizado con
-                            las últimas tendencias en desarrollo backend. También me gusta compartir conocimiento con otros
-                            desarrolladores y contribuir a la comunidad tech. Creo firmemente en el aprendizaje continuo y
-                            en que siempre hay algo nuevo por descubrir.
+                            <h3 class="about-subtitle">¿Qué me impulsa?</h3>
+                           Me apasiona ver cómo la tecnología transforma procesos que tomaban horas en tareas de minutos. La automatización no es solo código para mí, es mejorar la calidad de vida de las personas que usan esos sistemas día a día.
+                        </p>
+                        <p>
+                            <h3 class="about-subtitle">Más allá del código</h3>
+                            Cuando no estoy programando, me mantengo actualizado con las últimas tendencias en desarrollo backend, contribuyo en comunidades tech y comparto conocimiento con otros desarrolladores. Creo firmemente en el aprendizaje continuo y en que siempre hay algo nuevo por descubrir.                            
                         </p>
 
                         <div class="personal-interests">
-                            <h3 class="about-subtitle">Intereses</h3>
+                            <h3 class="about-subtitle">Intereses Profesionales</h3>
                             <div class="interests-grid">
                                 <div class="interest-item">
                                     <i class="fas fa-code"></i>
-                                    <span>Desarrollo Backend</span>
+                                    <span>Desarrollo de software</span>
                                 </div>
                                 <div class="interest-item">
                                     <i class="fas fa-robot"></i>
-                                    <span>Automatización</span>
+                                    <span>Automatización e IA</span>
                                 </div>
-                                <div class="interest-item">
+                                <!-- <div class="interest-item">
                                     <i class="fas fa-database"></i>
                                     <span>Optimización de BD</span>
-                                </div>
+                                </div> -->
                                 <div class="interest-item">
                                     <i class="fas fa-book"></i>
                                     <span>Aprendizaje Continuo</span>
@@ -471,104 +473,23 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- <div class="about-stats">
-                        <h3 class="about-subtitle">Logros en Números</h3>
-                        <div class="stat-card">
-                            <h3>3+</h3>
-                            <p data-translate="years-experience">Años de Experiencia</p>
-                        </div>
-                        <div class="stat-card">
-                            <h3>85%</h3>
-                            <p data-translate="efficiency-improvement">Reducción de Tiempos</p>
-                        </div>
-                        <div class="stat-card">
-                            <h3>20+</h3>
-                            <p data-translate="automation-processes">Procesos Automatizados</p>
-                        </div>
-                        <div class="stat-card">
-                            <h3>15+</h3>
-                            <p data-translate="projects-completed">APIs REST Desarrolladas</p>
-                        </div>
-                        <div class="stat-card">
-                            <h3>5+</h3>
-                            <p data-translate="databases-optimized">Bases de Datos Optimizadas</p>
-                        </div>
-                        <div class="stat-card">
-                            <h3>100%</h3>
-                            <p data-translate="client-satisfaction">Satisfacción del Cliente</p>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
-    <section class="section experience" id="experience">
+    <section>
         <div class="container">
-            <h2 class="section-title" data-translate="experience-title">Experiencia Profesional</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-marker current"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <h3 data-translate="current-job-title">Software Engineer</h3>
-                            <span class="company" data-translate="current-company">Ara y Bustamante Consultores</span>
-                            <span class="period" data-translate="current-period">Sep 2024 - Presente</span>
-                        </div>
-                        <ul class="timeline-achievements">
-                            <li data-translate="current-achievement-1">Diseñé arquitectura segura y escalable integrando web corporativa con portal de aplicaciones</li>
-                            <li data-translate="current-achievement-2">Desarrollé Bot automatizado del SII y app de conversión de divisas en tiempo real</li>
-                            <li data-translate="current-achievement-3">Transformé infraestructura de datos migrando de Excel a MySQL</li>
-                            <li data-translate="current-achievement-4">Lideré adopción tecnológica capacitando equipos en CRM Zoho</li>
-                        </ul>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Spring Boot</span>
-                            <span class="tech-tag">.NET</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">Zoho</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <h3 data-translate="previous-job-title">Data Analyst & Process Automation Specialist</h3>
-                            <span class="company" data-translate="previous-company">Sodexo Chile</span>
-                            <span class="period" data-translate="previous-period">Ago 2023 - Ago 2024</span>
-                        </div>
-                        <ul class="timeline-achievements">
-                            <li data-translate="previous-achievement-1">Implementé soluciones automatizadas que mejoraron la eficiencia en 65%</li>
-                            <li data-translate="previous-achievement-2">Desarrollé algoritmos de limpieza de datos con Pandas y VBA</li>
-                            <li data-translate="previous-achievement-3">Colaboré con equipos multidisciplinarios optimizando flujos de información</li>
-                        </ul>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">SQL</span>
-                            <span class="tech-tag">Power BI</span>
-                            <span class="tech-tag">Pandas</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section class="section skills" id="skills">
-        <div class="container">
-            <h2 class="section-title" data-translate="skills-title">Competencias Técnicas</h2>
+            <></>
             <div class="skills-grid">
-                <div class="skill-category">
+                <!-- <div class="skill-category">
                     <h3 data-translate="backend-title">Backend & APIs</h3>
                     <div class="skill-items">
                         <span class="skill-item">Spring Boot</span>
-                        <span class="skill-item">.NET</span>
-                        <span class="skill-item">Python</span>
+                        <span class="skill-item">.NET Core</span>
+                        <span class="skill-item">Python/FastAPI</span>
                         <span class="skill-item">REST APIs</span>
+                        <span class="skill-item">Microservicios</span>
                         <span class="skill-item">Webpay Integration</span>
                     </div>
                 </div>
@@ -580,6 +501,18 @@
                         <span class="skill-item">MySQL</span>
                         <span class="skill-item">MongoDB</span>
                         <span class="skill-item">SQL Optimization</span>
+                        <span class="skill-item">Database Design</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 data-translate="automation-title">Automatización & RPA</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">Playwright</span>
+                        <span class="skill-item">Selenium</span>
+                        <span class="skill-item">Web Scraping</span>
+                        <span class="skill-item">Process Automation</span>
+                        <span class="skill-item">ETL Pipelines</span>
                     </div>
                 </div>
                 
@@ -598,34 +531,40 @@
                     <div class="skill-items">
                         <span class="skill-item">Power BI</span>
                         <span class="skill-item">Python Analytics</span>
+                        <span class="skill-item">Pandas/NumPy</span>
                         <span class="skill-item">Excel Avanzado</span>
                         <span class="skill-item">Data Mining</span>
                     </div>
                 </div>
                 
                 <div class="skill-category">
-                    <h3 data-translate="methodology-title">Metodologías</h3>
+                    <h3 data-translate="devops-title">DevOps & Tools</h3>
                     <div class="skill-items">
-                        <span class="skill-item">Scrum</span>
-                        <span class="skill-item">BPMN</span>
-                        <span class="skill-item">Desarrollo Ágil</span>
-                        <span class="skill-item">DevOps</span>
+                        <span class="skill-item">Git/GitHub</span>
+                        <span class="skill-item">Docker</span>
+                        <span class="skill-item">AWS</span>
+                        <span class="skill-item">CI/CD</span>
+                        <span class="skill-item">Linux</span>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
-    </section>
-
+    </section> 
 
     <!-- Contact Section -->
     <section class="section contact" id="contact">
         <div class="container">
-            <h2 class="section-title" data-translate="contact-title">Conectemos</h2>
+            <h2 class="section-title" data-translate="contact-title">Conversemos</h2>
             <div class="contact-content">
                 <div class="contact-text">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">¿Tienes un proyecto interesante?</h3>
                     <p data-translate="contact-description">
-                        ¿Tienes un proyecto interesante? ¿Buscas alguien que combine habilidades técnicas 
-                        con visión de negocio? Hablemos sobre cómo puedo contribuir a tu equipo.
+                        Busco oportunidades donde pueda combinar habilidades técnicas con visión de negocio 
+                        para crear soluciones que realmente importen. Si tu equipo necesita un Backend Developer 
+                        enfocado en resultados, hablemos.
+                    </p>
+                    <p style="margin-top: 1rem; font-weight: 600; color: #64ffda;">
+                        Disponible para: Trabajo remoto | Presencial en Santiago | Proyectos freelance
                     </p>
                 </div>
                 <div class="contact-info">
@@ -635,17 +574,17 @@
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
-                        <a href="tel:+56958444125">+569 58444125</a>
+                        <a href="tel:+56958444125">+569 5844 4125</a>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <span>Santiago, Chile</span>
                     </div>
                     <div class="contact-socials">
-                        <a href="#" class="social-link" title="LinkedIn">
+                        <a href="https://www.linkedin.com/in/matias-cofre/" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
-                        <a href="#" class="social-link" title="GitHub">
+                        <a href="https://github.com/Cofre-dev" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
                             <i class="fab fa-github"></i>
                         </a>
                     </div>
@@ -657,7 +596,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p data-translate="footer-text">&copy; 2025 Matías Cofré.</p>
+            <p data-translate="footer-text">&copy; 2025 Matías Cofré. Construyendo soluciones que impactan.</p>
         </div>
     </footer>
 

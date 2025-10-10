@@ -113,6 +113,25 @@ class PortfolioManager {
             languageToggle.addEventListener('click', () => this.toggleLanguage());
         }
 
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenuToggle && mobileMenu) {
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenuToggle.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            const mobileLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                });
+            });
+        }
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener('click', (e) => {
@@ -145,14 +164,11 @@ class PortfolioManager {
     handleHeaderScroll() {
         const header = document.querySelector('.header');
         const scrollY = window.scrollY;
-        
-        if (scrollY > 100) {
-            header.style.background = 'rgba(255, 255, 255, 0.95)';
-            if (this.currentTheme === 'dark') {
-                header.style.background = 'rgba(15, 23, 42, 0.95)';
-            }
+
+        if (scrollY > 50) {
+            header.classList.add('scrolled');
         } else {
-            header.style.background = 'var(--bg-card)';
+            header.classList.remove('scrolled');
         }
     }
 
