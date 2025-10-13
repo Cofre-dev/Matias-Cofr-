@@ -6,7 +6,12 @@ const translations = {
     es: {
         // Navigation & Header
         "name": "Matías Cofré",
-        
+        "nav-home": "Inicio",
+        "nav-projects": "Proyectos",
+        "nav-experience": "Experiencia",
+        "nav-about": "Sobre Mí",
+        "nav-contact": "Contacto",
+
         // Hero Section
         "hero-greeting": "Hola, soy",
         "hero-role": "Software Engineer & Backend Developer",
@@ -14,9 +19,9 @@ const translations = {
         "hero-contact": "Contacto",
         "hero-projects": "Ver Proyectos",
         "view-tech": "Ver Tecnologías",
-        
+
         // Tech Stack
-        "tech-stack": "Tecnologías que domino",
+        "tech-stack": "Tecnologías que manejo",
         
         // About Section
         "about-title": "Sobre Mí",
@@ -26,6 +31,18 @@ const translations = {
         "years-experience": "Años de Experiencia",
         "efficiency-improvement": "Mejora en Eficiencia",
         "industries": "Industrias",
+
+        // Flip Cards
+        "profession-label": "Profesión",
+        "profession-detail": "Ingeniero en Informática",
+        "location-label": "Ubicación",
+        "location-detail": "Santiago, Chile",
+        "languages-label": "Idiomas",
+        "languages-detail": "Español · Inglés",
+        "education-label": "Educación",
+        "education-detail": "Ingeniería en Informática",
+        "experience-label": "Experiencia",
+        "experience-detail": "3+ Años",
         
         // Experience Section
         "experience-title": "Experiencia Profesional",
@@ -53,26 +70,26 @@ const translations = {
         "methodology-title": "Metodologías",
         
         // Projects Section
-        "projects-title": "Proyectos Destacados",
-        "project1-title": "Bot Automatizado SII",
-        "project1-description": "Automatización de procesos tributarios que reduce significativamente los tiempos de gestión y mejora la precisión en el manejo de documentos fiscales.",
-        "project2-title": "Conversor de Divisas",
-        "project2-description": "Aplicación en tiempo real que utiliza APIs del Banco Central para conversión de divisas con interfaz intuitiva y datos actualizados.",
-        "project3-title": "Migración de Datos",
-        "project3-description": "Transformación completa de infraestructura de datos desde Excel a MySQL, mejorando integridad y velocidad de consultas para análisis empresarial.",
+        "projects-title": "Proyectos de Alto Impacto",
+        "projects-subtitle": "Soluciones que han transformado la eficiencia operativa de empresas",
         
         // Contact Section
         "contact-title": "Conectemos",
-        "contact-description": "¿Tienes un proyecto interesante? ¿Buscas alguien que combine habilidades técnicas con visión de negocio? Hablemos sobre cómo puedo contribuir a tu equipo.",
+        "contact-description": "Respondo en menos de 24 horas",
         
         // Footer
-        "footer-text": "© 2024 Matías Cofré. Construido con pasión y código limpio."
+        "footer-text": "© 2025 Matías Cofré. Construido con pasión y código limpio."
     },
     
     en: {
         // Navigation & Header
         "name": "Matías Cofré",
-        
+        "nav-home": "Home",
+        "nav-projects": "Projects",
+        "nav-experience": "Experience",
+        "nav-about": "About Me",
+        "nav-contact": "Contact",
+
         // Hero Section
         "hero-greeting": "Hi, I'm",
         "hero-role": "Software Engineer & Backend Developer",
@@ -80,9 +97,9 @@ const translations = {
         "hero-contact": "Contact",
         "hero-projects": "View Projects",
         "view-tech": "View Technologies",
-        
+
         // Tech Stack
-        "tech-stack": "Technologies I master",
+        "tech-stack": "Technologies I Master",
         
         // About Section
         "about-title": "About Me",
@@ -92,6 +109,18 @@ const translations = {
         "years-experience": "Years of Experience",
         "efficiency-improvement": "Efficiency Improvement",
         "industries": "Industries",
+
+        // Flip Cards
+        "profession-label": "Profession",
+        "profession-detail": "Computer Engineer",
+        "location-label": "Location",
+        "location-detail": "Santiago, Chile",
+        "languages-label": "Languages",
+        "languages-detail": "Spanish · English",
+        "education-label": "Education",
+        "education-detail": "Computer Engineering",
+        "experience-label": "Experience",
+        "experience-detail": "3+ Years",
         
         // Experience Section
         "experience-title": "Professional Experience",
@@ -103,12 +132,13 @@ const translations = {
         "current-achievement-3": "Transformed data infrastructure migrating from Excel to MySQL",
         "current-achievement-4": "Led technology adoption by training teams in Zoho CRM",
         
-        "previous-job-title": "Data Analyst & Process Automation Specialist",
+        "previous-job-title": "Data Analyst & Process Automation",
         "previous-company": "Sodexo Chile",
         "previous-period": "Aug 2023 - Aug 2024",
-        "previous-achievement-1": "Implemented automated solutions that improved efficiency by 65%",
-        "previous-achievement-2": "Developed data cleaning algorithms with Pandas and VBA",
-        "previous-achievement-3": "Collaborated with multidisciplinary teams optimizing information flows",
+        "previous-achievement-1": "Implemented automated solutions that improved operational efficiency",
+        "previous-achievement-2": "Developed data cleaning and transformation algorithms with Pandas and VBA",
+        "previous-achievement-3": "Collaborated with multidisciplinary teams optimizing information system entry",
+        "previous-achievement-4": "Created interactive dashboards in Power BI for executive decision-making",
         
         // Skills Section
         "skills-title": "Technical Skills",
@@ -119,13 +149,8 @@ const translations = {
         "methodology-title": "Methodologies",
         
         // Projects Section
-        "projects-title": "Featured Projects",
-        "project1-title": "Automated SII Bot",
-        "project1-description": "Tax process automation that significantly reduces management times and improves accuracy in handling fiscal documents.",
-        "project2-title": "Currency Converter",
-        "project2-description": "Real-time application that uses Central Bank APIs for currency conversion with intuitive interface and updated data.",
-        "project3-title": "Data Migration",
-        "project3-description": "Complete data infrastructure transformation from Excel to MySQL, improving integrity and query speed for business analysis.",
+        "projects-title": "High-Impact Projects",
+        "projects-subtitle": "Solutions that have transformed business operational efficiency",
         
         // Contact Section
         "contact-title": "Let's Connect",

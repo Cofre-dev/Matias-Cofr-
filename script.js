@@ -6,7 +6,20 @@ class PortfolioManager {
     constructor() {
         this.currentTheme = 'dark';
         this.currentLanguage = 'es';
+        this.isMobile = this.detectMobile();
+        this.isTouchDevice = this.detectTouch();
         this.init();
+    }
+
+    // ===============================
+    // Device Detection
+    // ===============================
+    detectMobile() {
+        return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    detectTouch() {
+        return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }
 
     init() {
@@ -15,11 +28,22 @@ class PortfolioManager {
         this.bindEventListeners();
         this.initializeScrollAnimations();
         this.initializeIntersectionObserver();
-        this.initializeCodeRain();
+
+        // Initialize features based on device
+        if (!this.isMobile) {
+            this.initializeCodeRain();
+            this.initializeParticleSystem();
+        }
+
         this.initializeTechCarousel();
-        this.initializeParticleSystem();
         this.initializeAdvancedAnimations();
         this.initializeCodeTabs();
+        this.initializeFlipCards();
+
+        // Touch-specific optimizations
+        if (this.isTouchDevice) {
+            this.initializeTouchOptimizations();
+        }
     }
 
     initializeTheme() {
@@ -138,14 +162,12 @@ class PortfolioManager {
                 e.preventDefault();
                 const targetId = link.getAttribute('href').substring(1);
                 const targetElement = document.getElementById(targetId);
-                
+
                 if (targetElement) {
-                    const headerHeight = document.querySelector('.header').offsetHeight;
-                    const targetPosition = targetElement.offsetTop - headerHeight - 20;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
+                    // Scroll suave a la sección
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
                 }
             });
@@ -170,6 +192,30 @@ class PortfolioManager {
         } else {
             header.classList.remove('scrolled');
         }
+
+        // Update active nav link based on scroll position
+        this.updateActiveNavLink();
+    }
+
+    updateActiveNavLink() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const scrollY = window.scrollY;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+
+            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
     }
 
     initializeScrollAnimations() {
@@ -573,6 +619,439 @@ class PortfolioManager {
             });
         });
     }
+
+    // ===============================
+    // Flip Cards Functionality
+    // ===============================
+    initializeFlipCards() {
+        const flipCards = document.querySelectorAll('.flip-card');
+
+        flipCards.forEach(card => {
+            // Manejar click/tap
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                card.classList.toggle('flipped');
+            });
+
+            // Prevenir que se cierre al hacer clic dentro de la tarjeta
+            card.addEventListener('touchstart', (e) => {
+                e.stopPropagation();
+            }, { passive: true });
+        });
+
+        // Cerrar tarjetas al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.flip-card')) {
+                flipCards.forEach(card => {
+                    card.classList.remove('flipped');
+                });
+            }
+        });
+    }
+
+    // ===============================
+    // Advanced Animation System
+    // ===============================
+    initializeAdvancedScrollAnimations() {
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const animationObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                        entry.target.style.animation = `fadeInUpBig 0.8s ease-out forwards`;
+                    }, index * 100);
+                    animationObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animatable elements
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            animationObserver.observe(el);
+        });
+    }
+
+    // ===============================
+    // 3D Tilt Effect for Cards
+    // ===============================
+    initialize3DTilt() {
+        // Skip 3D tilt on mobile devices
+        if (this.isMobile || this.isTouchDevice) return;
+
+        const cards = document.querySelectorAll('.project-card.enhanced, .flip-card, .timeline-content');
+
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * 5;
+                const rotateY = ((centerX - x) / centerX) * 5;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+            });
+        });
+    }
+
+    // ===============================
+    // Cursor Trail Effect
+    // ===============================
+    initializeCursorTrail() {
+        const trail = [];
+        const trailLength = 20;
+
+        document.addEventListener('mousemove', (e) => {
+            trail.push({ x: e.clientX, y: e.clientY });
+
+            if (trail.length > trailLength) {
+                trail.shift();
+            }
+
+            this.renderTrail(trail);
+        });
+    }
+
+    renderTrail(trail) {
+        // Remove old trail elements
+        document.querySelectorAll('.cursor-trail').forEach(el => el.remove());
+
+        // Create new trail
+        trail.forEach((point, index) => {
+            const dot = document.createElement('div');
+            dot.className = 'cursor-trail';
+            dot.style.cssText = `
+                position: fixed;
+                width: ${10 - (index * 0.5)}px;
+                height: ${10 - (index * 0.5)}px;
+                background: var(--primary);
+                border-radius: 50%;
+                pointer-events: none;
+                left: ${point.x}px;
+                top: ${point.y}px;
+                transform: translate(-50%, -50%);
+                opacity: ${1 - (index / trail.length)};
+                z-index: 9999;
+                transition: all 0.1s ease;
+            `;
+            document.body.appendChild(dot);
+        });
+    }
+
+    // ===============================
+    // Magnetic Button Effect
+    // ===============================
+    initializeMagneticButtons() {
+        const buttons = document.querySelectorAll('.btn, .nav-link-cta, .repository-button');
+
+        buttons.forEach(button => {
+            button.addEventListener('mousemove', (e) => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+
+                button.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            });
+
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'translate(0, 0)';
+            });
+        });
+    }
+
+    // ===============================
+    // Parallax Scroll Effect
+    // ===============================
+    initializeParallaxScroll() {
+        const parallaxElements = document.querySelectorAll('.hero-visual, .floating-card, .code-editor');
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+
+            parallaxElements.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1);
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+    }
+
+    // ===============================
+    // Reveal Text Animation
+    // ===============================
+    initializeTextReveal() {
+        const textElements = document.querySelectorAll('.hero-title, .section-title');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('text-reveal');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        textElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+    }
+
+    // ===============================
+    // Ripple Effect on Click
+    // ===============================
+    initializeRippleEffect() {
+        const rippleElements = document.querySelectorAll('.btn, .nav-link, .project-card');
+
+        rippleElements.forEach(element => {
+            element.classList.add('ripple');
+        });
+    }
+
+    // ===============================
+    // Spotlight Follow Cursor
+    // ===============================
+    initializeSpotlight() {
+        const cards = document.querySelectorAll('.project-card.enhanced, .timeline-content');
+
+        cards.forEach(card => {
+            card.classList.add('spotlight');
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const spotlight = card.querySelector('::before');
+                if (spotlight) {
+                    card.style.setProperty('--x', `${x}px`);
+                    card.style.setProperty('--y', `${y}px`);
+                }
+            });
+        });
+    }
+
+    // ===============================
+    // Enhanced Loading Animation
+    // ===============================
+    initializeLoadingAnimation() {
+        const elements = document.querySelectorAll('.hero-content > *, .section-title, .project-card, .timeline-item');
+
+        elements.forEach((element, index) => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+
+            setTimeout(() => {
+                element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }, 100 * index);
+        });
+    }
+
+    // ===============================
+    // Scroll Progress Indicator
+    // ===============================
+    initializeScrollProgress() {
+        const progressBar = document.createElement('div');
+        progressBar.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 10000;
+            transition: width 0.2s ease;
+            box-shadow: 0 0 10px var(--primary);
+        `;
+        document.body.appendChild(progressBar);
+
+        window.addEventListener('scroll', () => {
+            const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = (window.pageYOffset / windowHeight) * 100;
+            progressBar.style.width = `${scrolled}%`;
+        });
+    }
+
+    // ===============================
+    // Animated Counter
+    // ===============================
+    animateCounters() {
+        const counters = document.querySelectorAll('[data-count]');
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.getAttribute('data-count'));
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+
+                    const updateCounter = () => {
+                        current += step;
+                        if (current < target) {
+                            entry.target.textContent = Math.floor(current);
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            entry.target.textContent = target;
+                        }
+                    };
+
+                    updateCounter();
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(counter => {
+            counterObserver.observe(counter);
+        });
+    }
+
+    // ===============================
+    // Touch Device Optimizations
+    // ===============================
+    initializeTouchOptimizations() {
+        // Add touch-friendly classes
+        document.body.classList.add('touch-device');
+
+        // Optimize touch interactions for cards
+        const cards = document.querySelectorAll('.project-card.enhanced, .flip-card');
+        cards.forEach(card => {
+            // Add visual feedback on touch
+            card.addEventListener('touchstart', () => {
+                card.style.transform = 'scale(0.98)';
+            }, { passive: true });
+
+            card.addEventListener('touchend', () => {
+                setTimeout(() => {
+                    card.style.transform = 'scale(1)';
+                }, 100);
+            }, { passive: true });
+        });
+
+        // Optimize button touches
+        const buttons = document.querySelectorAll('.btn, .repository-button, .nav-link-cta');
+        buttons.forEach(button => {
+            button.addEventListener('touchstart', () => {
+                button.style.transform = 'scale(0.95)';
+            }, { passive: true });
+
+            button.addEventListener('touchend', () => {
+                setTimeout(() => {
+                    button.style.transform = 'scale(1)';
+                }, 150);
+            }, { passive: true });
+        });
+
+        // Optimize tech items for touch
+        const techItems = document.querySelectorAll('.tech-item');
+        techItems.forEach(item => {
+            item.addEventListener('touchstart', (e) => {
+                e.currentTarget.style.transform = 'translateY(-8px) scale(1.08)';
+            }, { passive: true });
+
+            item.addEventListener('touchend', (e) => {
+                setTimeout(() => {
+                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                }, 200);
+            }, { passive: true });
+        });
+
+        // Prevent long-press context menu on interactive elements
+        const interactiveElements = document.querySelectorAll('.project-card, .btn, .tech-item, .flip-card');
+        interactiveElements.forEach(element => {
+            element.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+            });
+        });
+
+        // Optimize scroll performance
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    this.handleHeaderScroll();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // Add swipe detection for mobile menu
+        this.initializeSwipeGestures();
+    }
+
+    // ===============================
+    // Swipe Gestures for Mobile
+    // ===============================
+    initializeSwipeGestures() {
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            this.handleSwipe(touchStartX, touchEndX, mobileMenu, mobileMenuToggle);
+        }, { passive: true });
+    }
+
+    handleSwipe(startX, endX, menu, toggle) {
+        const swipeThreshold = 100;
+        const diff = startX - endX;
+
+        // Swipe left to close menu
+        if (diff > swipeThreshold && menu.classList.contains('active')) {
+            toggle.classList.remove('active');
+            menu.classList.remove('active');
+        }
+
+        // Swipe right to open menu (only from left edge)
+        if (diff < -swipeThreshold && startX < 50 && !menu.classList.contains('active')) {
+            toggle.classList.add('active');
+            menu.classList.add('active');
+        }
+    }
+
+    // ===============================
+    // Auto-apply Animation Classes
+    // ===============================
+    autoApplyAnimationClasses() {
+        // Add animation classes to elements on page load
+        const projectCards = document.querySelectorAll('.project-card.enhanced');
+        projectCards.forEach((card, index) => {
+            card.classList.add('animate-on-scroll');
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        timelineItems.forEach((item, index) => {
+            item.classList.add('animate-on-scroll');
+            item.style.animationDelay = `${index * 0.15}s`;
+        });
+
+        const techItems = document.querySelectorAll('.tech-item');
+        techItems.forEach(item => {
+            item.classList.add('floating');
+        });
+    }
 }
 
 // ===============================
@@ -581,26 +1060,49 @@ class PortfolioManager {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize the portfolio manager
     const portfolio = new PortfolioManager();
-    
+
     // Initialize additional effects
     portfolio.initializeTypingEffect();
     portfolio.initializeParallax();
     portfolio.initializeTerminalTyping();
     portfolio.initializeCodeEditor();
     portfolio.initializeParallaxElements();
-    
+
+    // Auto-apply animation classes
+    portfolio.autoApplyAnimationClasses();
+
+    // Initialize advanced animations (only on desktop)
+    if (!portfolio.isMobile) {
+        portfolio.initializeAdvancedScrollAnimations();
+        portfolio.initialize3DTilt();
+        portfolio.initializeMagneticButtons();
+        portfolio.initializeParallaxScroll();
+        portfolio.initializeTextReveal();
+        portfolio.initializeSpotlight();
+    }
+
+    // Initialize on all devices
+    portfolio.initializeRippleEffect();
+    portfolio.initializeLoadingAnimation();
+    portfolio.initializeScrollProgress();
+    portfolio.animateCounters();
+
+    // Optional: Initialize cursor trail (can be resource-intensive)
+    // Uncomment if you want the cursor trail effect
+    // portfolio.initializeCursorTrail();
+
     // Add loading animation completion
     document.body.classList.add('loaded');
-    
+
     // Add a welcome message for first-time visitors
     setTimeout(() => {
-        const welcomeMessage = portfolio.currentLanguage === 'es' 
-            ? 'Bienvenido a mi portfolio. Presiona Ctrl+Shift+T para cambiar el tema o Ctrl+Shift+L para cambiar idioma.'
-            : 'Welcome to my portfolio. Press Ctrl+Shift+T to change theme or Ctrl+Shift+L to change language.';
-        
+        const welcomeMessage = portfolio.currentLanguage === 'es'
+            ? '✨ Bienvenido a mi portfolio. Presiona Ctrl+Shift+T para cambiar el tema o Ctrl+Shift+L para cambiar idioma.'
+            : '✨ Welcome to my portfolio. Press Ctrl+Shift+T to change theme or Ctrl+Shift+L to change language.';
+
         console.log('💡 ' + welcomeMessage);
     }, 1000);
-    
+
 });
 
 // ===============================
