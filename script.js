@@ -410,15 +410,6 @@ class PortfolioManager {
             const clone = item.cloneNode(true);
             track.appendChild(clone);
         });
-
-        // Add hover pause functionality
-        track.addEventListener('mouseenter', () => {
-            track.style.animationPlayState = 'paused';
-        });
-
-        track.addEventListener('mouseleave', () => {
-            track.style.animationPlayState = 'running';
-        });
     }
 
     // ===============================
@@ -621,31 +612,22 @@ class PortfolioManager {
     }
 
     // ===============================
-    // Flip Cards Functionality
+    // Info Cards - No Flip Needed
     // ===============================
     initializeFlipCards() {
-        const flipCards = document.querySelectorAll('.flip-card');
+        // Cards now display all information without flipping
+        // Just add smooth hover interactions
+        const infoCards = document.querySelectorAll('.flip-card');
 
-        flipCards.forEach(card => {
-            // Manejar click/tap
-            card.addEventListener('click', (e) => {
-                e.preventDefault();
-                card.classList.toggle('flipped');
+        infoCards.forEach(card => {
+            // Add subtle scale effect on hover for better UX
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'all 0.3s ease';
             });
 
-            // Prevenir que se cierre al hacer clic dentro de la tarjeta
-            card.addEventListener('touchstart', (e) => {
-                e.stopPropagation();
-            }, { passive: true });
-        });
-
-        // Cerrar tarjetas al hacer clic fuera
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.flip-card')) {
-                flipCards.forEach(card => {
-                    card.classList.remove('flipped');
-                });
-            }
+            card.addEventListener('mouseleave', () => {
+                card.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
         });
     }
 

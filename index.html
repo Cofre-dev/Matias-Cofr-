@@ -65,10 +65,10 @@
             </div>
 
             <div class="nav-controls">
-                <button class="language-toggle" id="languageToggle" title="Cambiar idioma / Change language">
+                <!-- <button class="language-toggle" id="languageToggle" title="Cambiar idioma / Change language">
                     <i class="fas fa-language"></i>
                     <span class="lang-text" id="currentLang">ES</span>
-                </button>
+                </button> -->
                 <button class="theme-toggle" id="themeToggle">
                     <i class="fas fa-moon"></i>
                 </button>
@@ -215,7 +215,7 @@
     <section class="section projects" id="projects">
         <div class="container">
             <div class="projects-header">
-                <h2 class="section-title" data-translate="projects-title">Proyectos de Alto Impacto</h2>
+                <h2 class="section-title" data-translate="projects-title">Proyectos más importantes</h2>
                 <p class="projects-subtitle" data-translate="projects-subtitle">
                     Soluciones que han transformado la eficiencia operativa de empresas
                 </p>
@@ -243,7 +243,7 @@
                         <span>Chat Real-time</span>
                     </div>
                     <div class="project-repository">
-                        <a href="https://github.com/Cofre-dev/portal-clientes" target="_blank" rel="noopener noreferrer" class="repository-button">
+                        <a href="https://github.com/Cofre-dev/PortalClientes" target="_blank" rel="noopener noreferrer" class="repository-button">
                             <i class="fab fa-github"></i>
                             <span>Ver Repositorio</span>
                             <i class="fas fa-external-link-alt"></i>
@@ -258,12 +258,10 @@
                             <i class="fas fa-robot"></i>
                         </div>
                     </div>
-                    <h3>BOT de extracción de compras y ventas</h3>
+                    <h3>Bot Automatizado</h3>
                     <p>
-                        <strong>Automatización para Servicio de Impuestos Internos de Chile.</strong> 
-                        Bot desarrollado con Playwright que automatiza la extracción de compras y ventas fiscales. 
-                        El usuario ingresa credenciales tributarias y el sistema recupera automáticamente todos los 
-                        registros de compra/venta, ahorrando horas de trabajo manual mensual.
+                        <strong>Proyecto: Automatización de Consultas en el SII.</strong> 
+                        Este proyecto es una aplicación web que automatiza la consulta de boletas de honorarios emitidas y recibidas en el sitio web del Servicio de Impuestos Internos (SII) de Chile. Desarrollado con Node.js, el sistema combina un backend con Express.js y un potente motor de automatización web usando Puppeteer.
                     </p>
                     <div class="project-tags">
                         <span>JavaScript</span>
@@ -281,7 +279,7 @@
                     </div>
                 </div>
 
-                <!-- Proyecto 3: ETL Financiero -->
+                <!-- Proyecto 3: Generador de informes -->
                 <div class="project-card enhanced">
                     <div class="project-header">
                         <div class="project-icon">
@@ -302,7 +300,7 @@
                         <span class="badge">Matplotlib</span>
                     </div>
                     <div class="project-repository">
-                        <a href="https://github.com/Cofre-dev/generador-informes" target="_blank" rel="noopener noreferrer" class="repository-button">
+                        <a href="https://github.com/Cofre-dev/ETL-LV" target="_blank" rel="noopener noreferrer" class="repository-button">
                             <i class="fab fa-github"></i>
                             <span>Ver Repositorio</span>
                             <i class="fas fa-external-link-alt"></i>
@@ -338,6 +336,35 @@
                         </a>
                     </div>
                 </div>
+
+                <!-- Proyecto 5: Gestor de tareas -->
+                <div class="project-card enhanced">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                    </div>
+                    <h3>Gestor de tareas</h3>
+                    <p>
+                        <strong>Gestor de tareas tipo Trello.</strong> 
+                        Sistema de gestión de tareas, permite crear equipos, asignar tareas, monitorear las celulas de trabajo correctamente. 
+                        Las tareas se clasifican como "En proceso", "Completado" y "No completado". 
+                    </p>
+                    <div class="project-tags">
+                        <span>Python</span>
+                        <span>Django</span>
+                        <span>Json web tokens</span>
+                        <span>REST Framework</span>
+                    </div>
+                    <div class="project-repository">
+                        <a href="https://github.com/Cofre-dev/GestorTareas" target="_blank" rel="noopener noreferrer" class="repository-button">
+                            <i class="fab fa-github"></i>
+                            <span>Ver Repositorio</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -460,19 +487,6 @@
                     <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <i class="fas fa-graduation-cap"></i>
-                                <h4 data-translate="education-label">Educación</h4>
-                            </div>
-                            <div class="flip-card-back">
-                                <h4 data-translate="education-detail">Ingeniería en Informática</h4>
-                                <!-- <p data-translate="education-desc">Titulado</p> -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
                                 <i class="fas fa-calendar-alt"></i>
                                 <h4 data-translate="experience-label">Experiencia</h4>
                             </div>
@@ -531,79 +545,6 @@
             </div>
         </div>
     </section>
-
-    <!--Seccion abandonada-->
-    <section>
-        <div class="container">
-            <div class="skills-grid">
-                <!-- <div class="skill-category">
-                    <h3 data-translate="backend-title">Backend & APIs</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">Spring Boot</span>
-                        <span class="skill-item">.NET Core</span>
-                        <span class="skill-item">Python/FastAPI</span>
-                        <span class="skill-item">REST APIs</span>
-                        <span class="skill-item">Microservicios</span>
-                        <span class="skill-item">Webpay Integration</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3 data-translate="database-title">Bases de Datos</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">PostgreSQL</span>
-                        <span class="skill-item">MySQL</span>
-                        <span class="skill-item">MongoDB</span>
-                        <span class="skill-item">SQL Optimization</span>
-                        <span class="skill-item">Database Design</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3 data-translate="automation-title">Automatización & RPA</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">Playwright</span>
-                        <span class="skill-item">Selenium</span>
-                        <span class="skill-item">Web Scraping</span>
-                        <span class="skill-item">Process Automation</span>
-                        <span class="skill-item">ETL Pipelines</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3 data-translate="enterprise-title">Sistemas Empresariales</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">SAP</span>
-                        <span class="skill-item">Zoho ONE</span>
-                        <span class="skill-item">Defontana</span>
-                        <span class="skill-item">CRM Implementation</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3 data-translate="analysis-title">Análisis & Visualización</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">Power BI</span>
-                        <span class="skill-item">Python Analytics</span>
-                        <span class="skill-item">Pandas/NumPy</span>
-                        <span class="skill-item">Excel Avanzado</span>
-                        <span class="skill-item">Data Mining</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3 data-translate="devops-title">DevOps & Tools</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">Git/GitHub</span>
-                        <span class="skill-item">Docker</span>
-                        <span class="skill-item">AWS</span>
-                        <span class="skill-item">CI/CD</span>
-                        <span class="skill-item">Linux</span>
-                    </div>
-                </div> -->
-            </div>
-        </div>
-    </section> 
 
     <!-- Contact Section -->
     <section class="section contact" id="contact">

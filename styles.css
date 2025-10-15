@@ -24,8 +24,9 @@
   --shadow-lg: rgba(0, 0, 0, 0.15);
   
   /* Typography */
-  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --font-primary: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-headings: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
   
   /* Spacing */
   --space-xs: 0.5rem;
@@ -74,6 +75,7 @@ body {
   font-family: var(--font-primary);
   background: var(--bg-primary);
   color: var(--text-primary);
+  font-weight: 400;
   line-height: 1.6;
   transition: var(--transition);
   overflow-x: hidden;
@@ -88,9 +90,11 @@ body.loaded {
    Typography
    =============================== */
 h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headings);
   font-weight: 700;
   line-height: 1.2;
   color: var(--text-primary);
+  letter-spacing: -0.02em;
 }
 
 h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
@@ -281,6 +285,7 @@ a:hover {
 
 .brand-name {
   color: var(--text-primary);
+  font-family: var(--font-headings);
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -928,7 +933,7 @@ a:hover {
 
 /* Tech Stack Carousel */
 .tech-carousel-section {
-  padding: var(--space-xl) 0;
+  padding: var(--space-2xl) 0;
   background: var(--bg-secondary);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
@@ -936,24 +941,28 @@ a:hover {
 
 .carousel-title {
   text-align: center;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-xl);
   color: var(--text-primary);
+  font-family: var(--font-headings);
   font-size: 1.2rem;
   font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .tech-carousel {
   overflow: hidden;
   white-space: nowrap;
   position: relative;
-  mask: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
-  -webkit-mask: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+  padding: var(--space-sm) 0;
+  mask: linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%);
+  -webkit-mask: linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%);
 }
 
 .tech-track {
   display: inline-flex;
   animation: scroll 30s linear infinite;
-  gap: var(--space-lg);
+  gap: var(--space-xl);
+  padding: var(--space-md) 0;
 }
 
 .tech-item {
@@ -1023,7 +1032,9 @@ a:hover {
   align-items: center;
   padding: var(--space-sm) var(--space-lg);
   border-radius: 50px;
+  font-family: var(--font-headings);
   font-weight: 600;
+  letter-spacing: -0.01em;
   text-decoration: none;
   transition: var(--transition);
   position: relative;
@@ -1253,93 +1264,104 @@ a:hover {
   margin: var(--space-xl) 0;
 }
 
-/* Flip Card Styles */
+/* Info Card Styles - Dynamic & Visible */
 .flip-card {
-  background-color: transparent;
   width: 100%;
-  height: 150px;
-  perspective: 1000px;
+  min-height: 140px;
   position: relative;
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: var(--space-md);
+  border: 2px solid var(--border);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px var(--shadow);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.flip-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.flip-card:hover::before {
+  transform: scaleX(1);
+}
+
+.flip-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary);
+  box-shadow: 0 12px 35px rgba(37, 99, 235, 0.25);
 }
 
 .flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-style: preserve-3d;
-  cursor: pointer;
-}
-
-.flip-card:active .flip-card-inner {
-  transform: scale(0.98);
-}
-
-.flip-card.flipped .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card.flipped:active .flip-card-inner {
-  transform: rotateY(180deg) scale(0.98);
-}
-
-.flip-card-front, .flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  border-radius: 16px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: var(--space-sm);
-  padding: var(--space-lg);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--border);
-  box-shadow: 0 5px 15px var(--shadow);
-  transition: all 0.3s ease;
-}
-
-.flip-card:hover .flip-card-front {
-  border-color: var(--primary);
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
-}
-
-.flip-card:hover .flip-card-back {
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+  position: relative;
+  z-index: 1;
 }
 
 .flip-card-front {
-  background: var(--bg-card);
-  color: var(--text-primary);
-}
-
-.flip-card-back {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  color: var(--text-inverse);
-  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
 }
 
 .flip-card-front i {
   font-size: 2rem;
   color: var(--primary);
-  margin-bottom: var(--space-xs);
+  transition: all 0.3s ease;
+  min-width: 40px;
 }
 
-.flip-card-front h4,
-.flip-card-back h4 {
-  font-size: 1.1rem;
+.flip-card:hover .flip-card-front i {
+  transform: scale(1.1) rotate(5deg);
+  color: var(--accent);
+}
+
+.flip-card-front h4 {
+  font-size: 0.9rem;
   font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   margin: 0;
+}
+
+.flip-card-back {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.flip-card-back h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.flip-card:hover .flip-card-back h4 {
+  color: var(--primary);
 }
 
 .flip-card-back p {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
   margin: 0;
-  opacity: 0.9;
+  opacity: 0.8;
+  line-height: 1.4;
 }
 
 /* About Description */
@@ -1559,9 +1581,11 @@ a:hover {
 
 .company {
   color: var(--primary);
+  font-family: var(--font-headings);
   font-weight: 600;
   display: block;
   margin-bottom: var(--space-xs);
+  letter-spacing: -0.01em;
 }
 
 .period {
@@ -1825,8 +1849,10 @@ a:hover {
   color: #ffffff;
   text-decoration: none;
   border-radius: 10px;
+  font-family: var(--font-headings);
   font-weight: 600;
   font-size: 0.9rem;
+  letter-spacing: -0.01em;
   transition: var(--transition);
   border: 2px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);

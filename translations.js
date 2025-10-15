@@ -12,26 +12,6 @@ const translations = {
         "nav-about": "Sobre Mí",
         "nav-contact": "Contacto",
 
-        // Hero Section
-        "hero-greeting": "Hola, soy",
-        "hero-role": "Software Engineer & Backend Developer",
-        "hero-description": "Ingeniero en informática especializado en desarrollo Backend y automatización de procesos. Transformo ideas complejas en soluciones tecnológicas eficientes que impulsan el crecimiento empresarial.",
-        "hero-contact": "Contacto",
-        "hero-projects": "Ver Proyectos",
-        "view-tech": "Ver Tecnologías",
-
-        // Tech Stack
-        "tech-stack": "Tecnologías que manejo",
-        
-        // About Section
-        "about-title": "Sobre Mí",
-        "about-p1": "Soy un desarrollador backend con una mentalidad orientada al crecimiento y la innovación. Mi experiencia abarca desde la automatización de procesos complejos hasta el diseño de arquitecturas escalables en los sectores financiero, minero y tributario.",
-        "about-p2": "Mi enfoque va más allá del código: busco entender cómo la tecnología puede resolver problemas reales del negocio. Combino habilidades técnicas sólidas con una visión estratégica para crear soluciones que realmente impacten en la eficiencia operacional.",
-        "about-p3": "Actualmente curso mi último año de Ingeniería en Informática mientras trabajo como Software Engineer, demostrando mi capacidad de adaptación y constante búsqueda de crecimiento profesional.",
-        "years-experience": "Años de Experiencia",
-        "efficiency-improvement": "Mejora en Eficiencia",
-        "industries": "Industrias",
-
         // Flip Cards
         "profession-label": "Profesión",
         "profession-detail": "Ingeniero en Informática",
@@ -40,7 +20,6 @@ const translations = {
         "languages-label": "Idiomas",
         "languages-detail": "Español · Inglés",
         "education-label": "Educación",
-        "education-detail": "Ingeniería en Informática",
         "experience-label": "Experiencia",
         "experience-detail": "3+ Años",
         
@@ -49,15 +28,15 @@ const translations = {
         "current-job-title": "Software Engineer",
         "current-company": "Ara y Bustamante Consultores",
         "current-period": "Sep 2024 - Presente",
-        "current-achievement-1": "Diseñé arquitectura segura y escalable integrando web corporativa con portal de aplicaciones",
-        "current-achievement-2": "Desarrollé Bot automatizado del SII y app de conversión de divisas en tiempo real",
+        "current-achievement-1": "Programe un portal de clientes en PHP para la gestión de documentos, usando JWT para la autenticación y lo integré con la pagina web de la empresa",
+        "current-achievement-2": "Desarrollé Bot automatizado del SII con interfaz gráfica que captura las boletas de honorario emitidas y recibidas por las empresas",
         "current-achievement-3": "Transformé infraestructura de datos migrando de Excel a MySQL",
         "current-achievement-4": "Lideré adopción tecnológica capacitando equipos en CRM Zoho",
         
-        "previous-job-title": "Data Analyst & Process Automation Specialist",
+        "previous-job-title": "Data Analyst & Process Automation",
         "previous-company": "Sodexo Chile",
         "previous-period": "Ago 2023 - Ago 2024",
-        "previous-achievement-1": "Implementé soluciones automatizadas que mejoraron la eficiencia en 65%",
+        "previous-achievement-1": "Implementé soluciones automatizadas que mejoraron la eficiencia operativa",
         "previous-achievement-2": "Desarrollé algoritmos de limpieza de datos con Pandas y VBA",
         "previous-achievement-3": "Colaboré con equipos multidisciplinarios optimizando flujos de información",
         
@@ -65,19 +44,16 @@ const translations = {
         "skills-title": "Competencias Técnicas",
         "backend-title": "Backend & APIs",
         "database-title": "Bases de Datos",
-        "enterprise-title": "Sistemas Empresariales",
-        "analysis-title": "Análisis & Visualización",
-        "methodology-title": "Metodologías",
+        // "enterprise-title": "Sistemas Empresariales",
+        // "analysis-title": "Análisis & Visualización",
+        // "methodology-title": "Metodologías",
         
-        // Projects Section
-        "projects-title": "Proyectos de Alto Impacto",
+        // "projects-title": "Proyectos de Alto Impacto",
         "projects-subtitle": "Soluciones que han transformado la eficiencia operativa de empresas",
         
-        // Contact Section
         "contact-title": "Conectemos",
         "contact-description": "Respondo en menos de 24 horas",
         
-        // Footer
         "footer-text": "© 2025 Matías Cofré. Construido con pasión y código limpio."
     },
     
